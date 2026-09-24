@@ -1,0 +1,14 @@
+{
+  "name": "arora-communication-root",
+  "version": "1.0.0",
+  "description": "Full-stack E-Commerce for Arora Communication",
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "db:seed": "npm --prefix backend run prisma:seed",
+    "db:push": "npm --prefix backend run prisma:push"
+  }
+}
