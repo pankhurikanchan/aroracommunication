@@ -37,11 +37,11 @@ export const FloatingConcierge: React.FC = () => {
         )}
 
         <a
-          href="https://wa.me/917300791957?text=Hello%20Aurora%20Mobile%20Hub%2C%20I%20have%20a%20question%20about%20a%20product%20on%20your%20website."
+          href="https://wa.me/917300791957?text=Hello%20Arora%20Mobile%20Hub%2C%20I%20have%20a%20question%20about%20a%20product%20on%20your%20website."
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center gap-2 p-3 sm:px-4 sm:py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs shadow-xl shadow-emerald-600/30 transition-all duration-300 hover:scale-105 active:scale-95"
-          title="Chat with Aurora Mobile Hub on WhatsApp (+91 73007 91957)"
+          title="Chat with Arora Mobile Hub on WhatsApp (+91 73007 91957)"
         >
           <MessageCircle className="w-5 h-5 fill-current" />
           <span className="hidden sm:inline">WhatsApp Help</span>

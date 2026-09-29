@@ -42,11 +42,11 @@ export const RegisterPage: React.FC = () => {
               </div>
             </div>
             <span className="text-xl font-extrabold text-slate-900 tracking-tight">
-              AURORA <span className="text-indigo-600 font-light">MOBILE HUB</span>
+              ARORA <span className="text-indigo-600 font-light">MOBILE HUB</span>
             </span>
           </Link>
           <h1 className="text-xl font-extrabold text-slate-900">Create New Account</h1>
-          <p className="text-xs text-slate-500">Join Aurora Mobile Hub for express checkout and exclusive discounts</p>
+          <p className="text-xs text-slate-500">Join Arora Mobile Hub for express checkout and exclusive discounts</p>
         </div>
 
         {error && (

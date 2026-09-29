@@ -695,7 +695,7 @@ export const ProductDetailPage: React.FC = () => {
           </div>
           <div>
             <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
-            <p className="text-xs text-slate-500">Got questions about this product or purchasing from Aurora Mobile Hub?</p>
+            <p className="text-xs text-slate-500">Got questions about this product or purchasing from Arora Mobile Hub?</p>
           </div>
         </div>
 
@@ -703,10 +703,10 @@ export const ProductDetailPage: React.FC = () => {
           {[
             {
               q: 'Is this product 100% genuine and covered by brand warranty?',
-              a: 'Yes, every product sold on Aurora Mobile Hub is 100% brand authentic and brand-new in original retail packaging. It is backed by official manufacturer warranty valid across all authorized service centers nationwide.'
+              a: 'Yes, every product sold on Arora Mobile Hub is 100% brand authentic and brand-new in original retail packaging. It is backed by official manufacturer warranty valid across all authorized service centers nationwide.'
             },
             {
-              q: 'What is Aurora Mobile Hub\'s replacement & return policy?',
+              q: 'What is Arora Mobile Hub\'s replacement & return policy?',
               a: 'We offer a hassle-free 7-day replacement guarantee in the rare case you receive a defective or damaged product. Our dedicated customer care will arrange pickup and express replacement.'
             },
             {

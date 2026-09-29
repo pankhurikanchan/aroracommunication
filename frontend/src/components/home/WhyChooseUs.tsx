@@ -56,10 +56,10 @@ export const WhyChooseUs: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-indigo-600 mb-2">
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            <span>The Aurora Mobile Hub Standard of Trust</span>
+            <span>The Arora Mobile Hub Standard of Trust</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-            Why Shop at Aurora Mobile Hub?
+            Why Shop at Arora Mobile Hub?
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
             The personalized warmth and reliability of your local tech store, coupled with modern e-commerce convenience and transparent pricing.

@@ -118,7 +118,7 @@ export const HomePage: React.FC = () => {
               Upgrade to the Latest Flagship with Extra ₹5,000 Exchange Bonus
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-              Bring any working phone to Aurora Mobile Hub Bareilly (C-15 Ekta Nagar) or select online exchange during checkout. Instant doorstep pickup and valuation.
+              Bring any working phone to Arora Mobile Hub Bareilly (C-15 Ekta Nagar) or select online exchange during checkout. Instant doorstep pickup and valuation.
             </p>
           </div>
 
@@ -144,7 +144,7 @@ export const HomePage: React.FC = () => {
       {/* 8. New Arrivals */}
       <ProductShelf
         title="New Launches & Fresh Stock"
-        subtitle="Latest gadgets just unpacked at Aurora Mobile Hub store"
+        subtitle="Latest gadgets just unpacked at Arora Mobile Hub store"
         badge="JUST LAUNCHED"
         products={newArrivals}
         viewAllLink="/products?newArrival=true"
@@ -174,7 +174,7 @@ export const HomePage: React.FC = () => {
       {/* 12. Verified Customer Reviews */}
       <CustomerReviewsSection />
 
-      {/* 13. Why Choose Aurora Mobile Hub? */}
+      {/* 13. Why Choose Arora Mobile Hub? */}
       <WhyChooseUs />
     </div>
   );

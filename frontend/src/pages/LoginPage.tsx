@@ -69,7 +69,7 @@ export const LoginPage: React.FC = () => {
               </div>
             </div>
             <span className="text-xl font-extrabold text-slate-900 tracking-tight">
-              AURORA <span className="text-indigo-600 font-light">MOBILE HUB</span>
+              ARORA <span className="text-indigo-600 font-light">MOBILE HUB</span>
             </span>
           </Link>
           <h1 className="text-xl font-extrabold text-slate-900">Welcome Back</h1>

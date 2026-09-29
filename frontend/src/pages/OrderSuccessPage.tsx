@@ -83,7 +83,7 @@ export const OrderSuccessPage: React.FC = () => {
         </span>
 
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Thank You For Shopping with Aurora Mobile Hub
+          Thank You For Shopping with Arora Mobile Hub
         </h1>
 
         <p className="text-xs sm:text-sm text-slate-500 max-w-lg mx-auto">

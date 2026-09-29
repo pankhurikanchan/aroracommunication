@@ -6,16 +6,16 @@ export const AboutPage: React.FC = () => {
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-8 text-xs leading-relaxed text-slate-700">
       <div className="border-b border-slate-200 pb-4">
         <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest">Our Heritage</span>
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">About Aurora Mobile Hub</h1>
+        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">About Arora Mobile Hub</h1>
         <p className="text-sm text-slate-500 mt-1">Bareilly’s premier physical electronics store and India's trusted digital destination</p>
       </div>
 
       <div className="space-y-4 text-sm text-slate-600">
         <p>
-          Located at <strong>C-15, Ekta Nagar, Bareilly, Uttar Pradesh</strong>, <strong>Aurora Mobile Hub</strong> is Bareilly's foremost destination for genuine smartphones, flagship laptops, high-performance audio gear, and authentic mobile accessories.
+          Located at <strong>C-15, Ekta Nagar, Bareilly, Uttar Pradesh</strong>, <strong>Arora Mobile Hub</strong> is Bareilly's foremost destination for genuine smartphones, flagship laptops, high-performance audio gear, and authentic mobile accessories.
         </p>
         <p>
-          Unlike faceless online marketplaces, every single product sold by Aurora Mobile Hub is 100% brand authentic, brand-new in sealed retail packaging, backed by authorized manufacturer warranties and official GST invoices (GSTIN: 09DIYPA1147P1ZK).
+          Unlike faceless online marketplaces, every single product sold by Arora Mobile Hub is 100% brand authentic, brand-new in sealed retail packaging, backed by authorized manufacturer warranties and official GST invoices (GSTIN: 09DIYPA1147P1ZK).
         </p>
         <p>
           Our mission is to bring the trusted relationship, expert advice, and unbeatable value of our physical Bareilly showroom to customers across all of India through express doorstep shipping.
@@ -51,7 +51,7 @@ export const ContactPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
         <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
-          <h3 className="text-base font-bold text-slate-900">Aurora Mobile Hub Retail Store</h3>
+          <h3 className="text-base font-bold text-slate-900">Arora Mobile Hub Retail Store</h3>
 
           <div className="space-y-3 text-slate-600">
             <div className="flex items-start gap-3">
@@ -83,7 +83,7 @@ export const ContactPage: React.FC = () => {
               <Mail className="w-5 h-5 text-indigo-600 shrink-0" />
               <div>
                 <strong className="text-slate-900 block">Support Email:</strong>
-                support@auroramobilehub.com
+                support@aroramobilehub.com
               </div>
             </div>
 
@@ -131,7 +131,7 @@ export const ContactPage: React.FC = () => {
 export const ReturnPolicyPage: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 py-12 space-y-6 text-xs text-slate-700 leading-relaxed">
     <h1 className="text-3xl font-extrabold text-slate-900 pb-2 border-b border-slate-200">Return & 7-Day Replacement Policy</h1>
-    <p>At Aurora Mobile Hub, customer satisfaction and genuine trust are our top priorities. We offer a transparent 7-day replacement guarantee on all mobile devices and electronics.</p>
+    <p>At Arora Mobile Hub, customer satisfaction and genuine trust are our top priorities. We offer a transparent 7-day replacement guarantee on all mobile devices and electronics.</p>
     <h3 className="text-sm font-bold text-slate-900">Eligibility for Replacement:</h3>
     <ul className="list-disc pl-5 space-y-1">
       <li>Item arrived damaged in transit or with physical defect.</li>
@@ -139,14 +139,14 @@ export const ReturnPolicyPage: React.FC = () => (
       <li>Incorrect product or model variant delivered.</li>
     </ul>
     <h3 className="text-sm font-bold text-slate-900">Return Process:</h3>
-    <p>Simply message our WhatsApp support (+91 73007 91957 / +91 90271 22120) or email support@auroramobilehub.com with your Order Number and unboxing photos/video. A return pickup will be dispatched promptly.</p>
+    <p>Simply message our WhatsApp support (+91 73007 91957 / +91 90271 22120) or email support@aroramobilehub.com with your Order Number and unboxing photos/video. A return pickup will be dispatched promptly.</p>
   </div>
 );
 
 export const ShippingPolicyPage: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 py-12 space-y-6 text-xs text-slate-700 leading-relaxed">
     <h1 className="text-3xl font-extrabold text-slate-900 pb-2 border-b border-slate-200">Shipping & Delivery Policy</h1>
-    <p>All orders placed on Aurora Mobile Hub are dispatched with insured express courier partners including Blue Dart, Delhivery, DTDC, and Express Air Cargo.</p>
+    <p>All orders placed on Arora Mobile Hub are dispatched with insured express courier partners including Blue Dart, Delhivery, DTDC, and Express Air Cargo.</p>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
         <h4 className="font-bold text-slate-900 text-sm mb-1">Bareilly & UP Delivery</h4>

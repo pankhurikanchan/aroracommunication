@@ -301,7 +301,7 @@ export const Header: React.FC = () => {
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-blue-700 bg-clip-text text-transparent flex items-center gap-1.5">
-              <span>AURORA</span>
+              <span>ARORA</span>
               <span className="font-light text-indigo-600">MOBILE HUB</span>
             </div>
             <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-wider font-bold text-slate-500 -mt-0.5">
@@ -715,7 +715,7 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-xs font-semibold text-slate-600 hover:text-indigo-600 px-3 py-1"
               >
-                About Aurora Mobile Hub
+                About Arora Mobile Hub
               </Link>
               <Link
                 to="/contact"

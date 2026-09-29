@@ -72,12 +72,12 @@ export const Footer: React.FC = () => {
                 </div>
               </div>
               <span className="text-xl font-extrabold text-white tracking-tight">
-                AURORA <span className="text-indigo-400 font-light">MOBILE HUB</span>
+                ARORA <span className="text-indigo-400 font-light">MOBILE HUB</span>
               </span>
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed pr-4">
-              Aurora Mobile Hub is Bareilly’s premier destination for 100% genuine smartphones, flagship laptops,
+              Arora Mobile Hub is Bareilly’s premier destination for 100% genuine smartphones, flagship laptops,
               premium audio gear, and authentic mobile accessories. Serving customers with authentic products, official brand warranties,
               and great prices.
             </p>
@@ -108,7 +108,7 @@ export const Footer: React.FC = () => {
             {/* WhatsApp Contact button */}
             <div className="pt-2">
               <a
-                href="https://wa.me/917300791957?text=Hello%20Aurora%20Mobile%20Hub%2C%20I%20have%20an%20inquiry%20about%20a%20product."
+                href="https://wa.me/917300791957?text=Hello%20Arora%20Mobile%20Hub%2C%20I%20have%20an%20inquiry%20about%20a%20product."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition shadow-sm"
@@ -180,7 +180,7 @@ export const Footer: React.FC = () => {
             <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">Legal & Store Policies</h3>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/about" className="hover:text-cyan-400 transition">About Aurora Mobile Hub</Link>
+                <Link to="/about" className="hover:text-cyan-400 transition">About Arora Mobile Hub</Link>
               </li>
               <li>
                 <Link to="/privacy-policy" className="hover:text-cyan-400 transition">Privacy Policy</Link>
@@ -218,7 +218,7 @@ export const Footer: React.FC = () => {
 
       {/* Bottom Copyright */}
       <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p>© 2026 Aurora Mobile Hub. All rights reserved. &bull; GSTIN: 09DIYPA1147P1ZK</p>
+        <p>© 2026 Arora Mobile Hub. All rights reserved. &bull; GSTIN: 09DIYPA1147P1ZK</p>
         <p className="text-[11px]">
           C-15 Ekta Nagar, Bareilly &bull; Helpline: +91 73007 91957, +91 90271 22120
         </p>

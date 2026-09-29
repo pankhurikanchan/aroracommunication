@@ -304,7 +304,7 @@ export const AccountPage: React.FC = () => {
             <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center">
               <Package className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <h3 className="font-bold text-slate-800 text-sm mb-1">No Orders Yet</h3>
-              <p className="text-xs text-slate-500 mb-4">You have not placed any orders with Aurora Mobile Hub yet.</p>
+              <p className="text-xs text-slate-500 mb-4">You have not placed any orders with Arora Mobile Hub yet.</p>
               <Link to="/products" className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-bold">
                 Start Shopping
               </Link>
