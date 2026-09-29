@@ -7,7 +7,7 @@ interface AuthContextType {
   token: string | null;
   loading: boolean;
   isAdmin: boolean;
-  login: (email: string, password: string) => Promise<{ success: boolean; message?: string }>;
+  login: (email: string, password: string) => Promise<{ success: boolean; message?: string; user?: User }>;
   register: (name: string, email: string, password: string, phone?: string) => Promise<{ success: boolean; message?: string }>;
   logout: () => void;
   updateUser: (updatedUser: Partial<User>) => void;
@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(res.data.user);
         localStorage.setItem('arora_token', res.data.token);
         localStorage.setItem('arora_user', JSON.stringify(res.data.user));
-        return { success: true };
+        return { success: true, user: res.data.user };
       }
       return { success: false, message: res.data.message || 'Login failed' };
     } catch (err: any) {

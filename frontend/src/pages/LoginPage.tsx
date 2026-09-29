@@ -23,7 +23,25 @@ export const LoginPage: React.FC = () => {
     setLoading(false);
 
     if (res.success) {
-      navigate(redirect);
+      if (res.user?.role === 'ADMIN' && (redirect === '/' || redirect === '')) {
+        navigate('/admin');
+      } else {
+        navigate(redirect);
+      }
+    } else {
+      setError(res.message || 'Login failed');
+    }
+  };
+
+  const handleDirectOwnerLogin = async () => {
+    setError(null);
+    setLoading(true);
+    setEmail('admin@aroracommunication.com');
+    setPassword('Admin@123');
+    const res = await login('admin@aroracommunication.com', 'Admin@123');
+    setLoading(false);
+    if (res.success) {
+      navigate('/admin');
     } else {
       setError(res.message || 'Login failed');
     }
@@ -106,12 +124,27 @@ export const LoginPage: React.FC = () => {
           </button>
         </form>
 
-        {/* Demo Fast-Login Helpers */}
-        <div className="pt-2 border-t border-slate-100">
-          <span className="text-[11px] font-bold uppercase text-slate-400 block text-center mb-2 tracking-wider">
-            Quick 1-Click Demo Login
-          </span>
-          <div className="grid grid-cols-2 gap-2 text-xs">
+        {/* Store Owner Quick Portal Card */}
+        <div className="pt-2 border-t border-slate-100 space-y-2">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-indigo-500/10 to-purple-500/10 border border-amber-300/70 text-center">
+            <span className="text-[11px] font-extrabold uppercase text-amber-900 block tracking-wider">
+              👑 Shop Owner / Admin Access
+            </span>
+            <p className="text-[11px] text-slate-600 mt-0.5 mb-2.5">
+              Access product management, view customer orders & update shipping
+            </p>
+            <button
+              type="button"
+              disabled={loading}
+              onClick={handleDirectOwnerLogin}
+              className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-700 hover:to-indigo-700 text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2 hover:scale-[1.01]"
+            >
+              <ShieldCheck className="w-4 h-4 text-amber-200" />
+              <span>Launch Owner Admin Panel</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-xs pt-1">
             <button
               type="button"
               onClick={handleDemoAdmin}

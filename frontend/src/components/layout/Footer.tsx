@@ -187,8 +187,13 @@ export const Footer: React.FC = () => {
               <li>
                 <Link to="/warranty-policy" className="hover:text-cyan-400 transition">Warranty & Service Centers</Link>
               </li>
-              <li>
-                <Link to="/admin" className="text-slate-500 hover:text-slate-400 transition">Admin Portal</Link>
+              <li className="pt-2">
+                <Link
+                  to="/admin"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 hover:text-amber-200 border border-slate-700 font-bold transition text-xs shadow-sm"
+                >
+                  <span>👑 Store Owner / Admin Portal</span>
+                </Link>
               </li>
             </ul>
 
