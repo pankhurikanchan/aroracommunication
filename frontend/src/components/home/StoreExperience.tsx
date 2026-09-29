@@ -48,18 +48,18 @@ export const StoreExperience: React.FC = () => {
           <div className="lg:col-span-7 space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-black uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-              <span>THE ARORA PHYSICAL SHOWROOM ADVANTAGE</span>
+              <span>THE AURORA MOBILE HUB ADVANTAGE</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
               Prefer to Touch & Feel? <br />
               <span className="bg-gradient-to-r from-cyan-400 via-indigo-300 to-white bg-clip-text text-transparent">
-                Visit Our Flagship Experience Store in Noida
+                Visit Our Flagship Experience Store in Bareilly
               </span>
             </h2>
 
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-              Buy online with fast delivery, or visit our retail store in Sector 18 Noida to compare cameras, displays, and audio in person with our certified tech advisors.
+              Buy online with fast delivery, or visit our retail showroom in Ekta Nagar, Bareilly to compare cameras, displays, and audio in person with our certified tech advisors.
             </p>
 
             {/* 4 Feature Points */}
@@ -88,7 +88,7 @@ export const StoreExperience: React.FC = () => {
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-cyan-400" />
-                <span className="font-extrabold text-sm text-white">Arora Communication Showroom</span>
+                <span className="font-extrabold text-sm text-white">Aurora Mobile Hub Showroom</span>
               </div>
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40">
                 Open Today
@@ -98,7 +98,7 @@ export const StoreExperience: React.FC = () => {
             <div className="space-y-2.5 text-xs text-slate-300">
               <div className="flex items-start gap-2">
                 <span className="text-slate-400 font-bold shrink-0">Address:</span>
-                <span>Shop #14, Arora Complex, Main Commercial Market, Sector 18, Noida, UP 201301 (Near Metro Gate 2)</span>
+                <span>C-15, Ekta Nagar, Bareilly, Uttar Pradesh</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0" />
@@ -106,14 +106,22 @@ export const StoreExperience: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>+91 98765 43210 &bull; 0120-4567890</span>
+                <div className="flex flex-wrap gap-2">
+                  <a href="tel:+917300791957" className="text-cyan-300 hover:underline font-bold">+91 73007 91957</a>
+                  <span>&bull;</span>
+                  <a href="tel:+919027122120" className="text-emerald-300 hover:underline font-bold">+91 90271 22120</a>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="text-emerald-300 font-bold">GSTIN: 09DIYPA1147P1ZK</span>
               </div>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
               <a
-                href="https://maps.google.com/?q=Sector+18+Noida+Uttar+Pradesh"
+                href="https://maps.google.com/?q=C-15+Ekta+Nagar+Bareilly+Uttar+Pradesh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 py-3 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-lg transition"
@@ -123,7 +131,7 @@ export const StoreExperience: React.FC = () => {
               </a>
 
               <a
-                href="https://wa.me/919876543210?text=Hi%20Arora%20Communication%2C%20I%20want%20to%20check%20product%20availability%20at%20your%20Noida%20store."
+                href="https://wa.me/917300791957?text=Hi%20Aurora%20Mobile%20Hub%2C%20I%20want%20to%20check%20product%20availability%20at%20your%20Bareilly%20store."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-lg transition"

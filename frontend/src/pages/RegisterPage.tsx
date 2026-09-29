@@ -38,15 +38,15 @@ export const RegisterPage: React.FC = () => {
           <Link to="/" className="inline-flex items-center gap-2 mb-2">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-cyan-500 p-0.5 shadow-md">
               <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center text-white font-black text-xs">
-                AC
+                AM
               </div>
             </div>
             <span className="text-xl font-extrabold text-slate-900 tracking-tight">
-              ARORA <span className="text-indigo-600 font-light">COMMUNICATION</span>
+              AURORA <span className="text-indigo-600 font-light">MOBILE HUB</span>
             </span>
           </Link>
           <h1 className="text-xl font-extrabold text-slate-900">Create New Account</h1>
-          <p className="text-xs text-slate-500">Join Arora Communication for express checkout and exclusive discounts</p>
+          <p className="text-xs text-slate-500">Join Aurora Mobile Hub for express checkout and exclusive discounts</p>
         </div>
 
         {error && (

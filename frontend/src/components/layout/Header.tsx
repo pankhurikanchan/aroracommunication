@@ -232,18 +232,26 @@ export const Header: React.FC = () => {
             </Link>
 
             <a
-              href="tel:+919876543210"
-              className="hidden sm:flex items-center gap-1 hover:text-white transition font-medium"
+              href="tel:+917300791957"
+              className="hidden sm:flex items-center gap-1 hover:text-white transition font-semibold text-cyan-300"
             >
               <PhoneCall className="w-3 h-3 text-cyan-400" />
-              <span>+91 98765 43210</span>
+              <span>+91 73007 91957</span>
+            </a>
+
+            <a
+              href="tel:+919027122120"
+              className="hidden lg:flex items-center gap-1 hover:text-white transition font-semibold text-emerald-300"
+            >
+              <PhoneCall className="w-3 h-3 text-emerald-400" />
+              <span>+91 90271 22120</span>
             </a>
 
             <span className="hidden md:inline text-slate-600">|</span>
 
             <span className="hidden md:inline-flex items-center gap-1 text-slate-400">
               <Clock className="w-3 h-3 text-slate-500" />
-              <span>Open 7 Days &bull; 10 AM - 9:30 PM</span>
+              <span>C-15 Ekta Nagar, Bareilly &bull; 10 AM - 9:30 PM</span>
             </span>
           </div>
         </div>
@@ -293,13 +301,15 @@ export const Header: React.FC = () => {
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-blue-700 bg-clip-text text-transparent flex items-center gap-1.5">
-              <span>ARORA</span>
-              <span className="font-light text-indigo-600">COMMUNICATION</span>
+              <span>AURORA</span>
+              <span className="font-light text-indigo-600">MOBILE HUB</span>
             </div>
             <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-wider font-bold text-slate-500 -mt-0.5">
-              <span className="text-cyan-600 font-extrabold">NOIDA SEC 18</span>
+              <span className="text-cyan-600 font-extrabold">BAREILLY</span>
               <span>&bull;</span>
-              <span>100% GENUINE ELECTRONICS</span>
+              <span>C-15 EKTA NAGAR</span>
+              <span>&bull;</span>
+              <span className="text-emerald-600 font-semibold">GST: 09DIYPA1147P1ZK</span>
             </div>
           </div>
         </Link>
@@ -705,15 +715,23 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-xs font-semibold text-slate-600 hover:text-indigo-600 px-3 py-1"
               >
-                About Arora Communication
+                About Aurora Mobile Hub
               </Link>
               <Link
                 to="/contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-xs font-semibold text-slate-600 hover:text-indigo-600 px-3 py-1"
               >
-                Store Location & Noida Showroom
+                Store: C-15 Ekta Nagar, Bareilly
               </Link>
+              <div className="px-3 pt-2 text-[11px] text-slate-500 border-t border-slate-100">
+                <div className="font-bold text-slate-800">Helpline Numbers:</div>
+                <div className="flex flex-col gap-1 mt-1 font-semibold text-indigo-600">
+                  <a href="tel:+917300791957">+91 73007 91957</a>
+                  <a href="tel:+919027122120">+91 90271 22120</a>
+                </div>
+                <div className="text-[10px] text-slate-400 mt-1 font-medium">GSTIN: 09DIYPA1147P1ZK</div>
+              </div>
             </div>
           </div>
         </div>

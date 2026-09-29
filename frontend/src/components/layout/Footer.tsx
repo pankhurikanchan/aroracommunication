@@ -68,32 +68,36 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 p-0.5 flex items-center justify-center shadow-md">
                 <div className="w-full h-full bg-slate-900 rounded-[6px] flex items-center justify-center">
-                  <span className="text-white font-black text-sm">AC</span>
+                  <span className="text-white font-black text-sm">AM</span>
                 </div>
               </div>
               <span className="text-xl font-extrabold text-white tracking-tight">
-                ARORA <span className="text-indigo-400 font-light">COMMUNICATION</span>
+                AURORA <span className="text-indigo-400 font-light">MOBILE HUB</span>
               </span>
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed pr-4">
-              Arora Communication is your premier destination for genuine smartphones, flagship laptops,
-              premium audio gear, and authentic mobile accessories. Serving customers with trust, expert advice,
+              Aurora Mobile Hub is Bareilly’s premier destination for 100% genuine smartphones, flagship laptops,
+              premium audio gear, and authentic mobile accessories. Serving customers with authentic products, official brand warranties,
               and great prices.
             </p>
 
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-                <span>Shop #14, Arora Complex, Main Commercial Market, Sector 18, Noida, Uttar Pradesh 201301</span>
+                <span>C-15, Ekta Nagar, Bareilly, Uttar Pradesh</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>+91 98765 43210 / 0120-4567890</span>
+                <div className="flex flex-wrap gap-2">
+                  <a href="tel:+917300791957" className="hover:text-cyan-300 font-semibold">+91 73007 91957</a>
+                  <span>&bull;</span>
+                  <a href="tel:+919027122120" className="hover:text-emerald-300 font-semibold">+91 90271 22120</a>
+                </div>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-indigo-400 shrink-0" />
-                <span>support@aroracommunication.com</span>
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="font-bold text-emerald-400">GSTIN: 09DIYPA1147P1ZK</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0" />
@@ -104,13 +108,13 @@ export const Footer: React.FC = () => {
             {/* WhatsApp Contact button */}
             <div className="pt-2">
               <a
-                href="https://wa.me/919876543210?text=Hello%20Arora%20Communication%2C%20I%20have%20an%20inquiry%20about%20a%20product."
+                href="https://wa.me/917300791957?text=Hello%20Aurora%20Mobile%20Hub%2C%20I%20have%20an%20inquiry%20about%20a%20product."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition shadow-sm"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Chat on WhatsApp</span>
+                <span>Chat on WhatsApp (+91 73007 91957)</span>
               </a>
             </div>
           </div>
@@ -176,7 +180,7 @@ export const Footer: React.FC = () => {
             <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">Legal & Store Policies</h3>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/about" className="hover:text-cyan-400 transition">About Arora Communication</Link>
+                <Link to="/about" className="hover:text-cyan-400 transition">About Aurora Mobile Hub</Link>
               </li>
               <li>
                 <Link to="/privacy-policy" className="hover:text-cyan-400 transition">Privacy Policy</Link>
@@ -214,9 +218,9 @@ export const Footer: React.FC = () => {
 
       {/* Bottom Copyright */}
       <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p>© 2026 Arora Communication. All rights reserved.</p>
+        <p>© 2026 Aurora Mobile Hub. All rights reserved. &bull; GSTIN: 09DIYPA1147P1ZK</p>
         <p className="text-[11px]">
-          Designed with ❤️ for authentic Indian electronics shopping &bull; 100% Secure Checkout
+          C-15 Ekta Nagar, Bareilly &bull; Helpline: +91 73007 91957, +91 90271 22120
         </p>
       </div>
     </footer>

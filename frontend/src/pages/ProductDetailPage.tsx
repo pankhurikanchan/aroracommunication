@@ -695,7 +695,7 @@ export const ProductDetailPage: React.FC = () => {
           </div>
           <div>
             <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
-            <p className="text-xs text-slate-500">Got questions about this product or purchasing from Arora Communication?</p>
+            <p className="text-xs text-slate-500">Got questions about this product or purchasing from Aurora Mobile Hub?</p>
           </div>
         </div>
 
@@ -703,10 +703,10 @@ export const ProductDetailPage: React.FC = () => {
           {[
             {
               q: 'Is this product 100% genuine and covered by brand warranty?',
-              a: 'Yes, every product sold on Arora Communication is 100% brand authentic and brand-new in original retail packaging. It is backed by official manufacturer warranty valid across all authorized service centers nationwide.'
+              a: 'Yes, every product sold on Aurora Mobile Hub is 100% brand authentic and brand-new in original retail packaging. It is backed by official manufacturer warranty valid across all authorized service centers nationwide.'
             },
             {
-              q: 'What is Arora Communication\'s replacement & return policy?',
+              q: 'What is Aurora Mobile Hub\'s replacement & return policy?',
               a: 'We offer a hassle-free 7-day replacement guarantee in the rare case you receive a defective or damaged product. Our dedicated customer care will arrange pickup and express replacement.'
             },
             {
@@ -719,7 +719,7 @@ export const ProductDetailPage: React.FC = () => {
             },
             {
               q: 'Can I get a GST tax invoice for business expense?',
-              a: 'Yes, full tax invoices with GST breakups are generated automatically and sent to your email with your order confirmation.'
+              a: 'Yes! Official tax invoices with full GST breakups (GSTIN: 09DIYPA1147P1ZK) are generated automatically and sent to your email with your order confirmation.'
             }
           ].map((faq, index) => {
             const isOpen = openFaqIndex === index;

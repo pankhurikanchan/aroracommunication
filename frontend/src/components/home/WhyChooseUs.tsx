@@ -39,14 +39,14 @@ export const WhyChooseUs: React.FC = () => {
     {
       icon: <Headphones className="w-6 h-6 text-purple-600" />,
       bg: 'bg-purple-50 border-purple-200 text-purple-600',
-      title: 'Dedicated Noida Support Desk',
-      desc: 'Talk to knowledgeable tech experts 7 days a week via direct phone call, WhatsApp, or in person at our Noida store.',
+      title: 'Dedicated Bareilly Support Desk',
+      desc: 'Talk to knowledgeable tech experts 7 days a week via direct phone call (+91 73007 91957), WhatsApp, or in person at our Bareilly store.',
     },
     {
       icon: <Award className="w-6 h-6 text-amber-600" />,
       bg: 'bg-amber-50 border-amber-200 text-amber-600',
-      title: '10+ Years Trusted Legacy',
-      desc: 'A physical landmark mobile & electronics store established in Sector 18 Noida, now delivering across India.',
+      title: 'Trusted Bareilly Landmark',
+      desc: 'A physical landmark mobile & electronics store at C-15 Ekta Nagar, Bareilly, backed by valid GSTIN: 09DIYPA1147P1ZK.',
     },
   ];
 
@@ -56,10 +56,10 @@ export const WhyChooseUs: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-indigo-600 mb-2">
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            <span>The Arora Standard of Trust</span>
+            <span>The Aurora Mobile Hub Standard of Trust</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-            Why Shop at Arora Communication?
+            Why Shop at Aurora Mobile Hub?
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
             The personalized warmth and reliability of your local tech store, coupled with modern e-commerce convenience and transparent pricing.

@@ -673,7 +673,7 @@ export const CheckoutPage: React.FC = () => {
             <div className="pt-2 border-t border-slate-100 space-y-2 text-[11px] text-slate-500">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
-                <span>100% Purchase Protection by Arora Communication</span>
+                <span>100% Purchase Protection by Aurora Mobile Hub</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Truck className="w-3.5 h-3.5 text-cyan-600" />
