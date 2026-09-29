@@ -185,6 +185,11 @@ export const AdminOrders: React.FC = () => {
                       >
                         {ord.paymentStatus}
                       </span>
+                      {ord.notes && (
+                        <span className="text-[10px] text-slate-500 block mt-1 truncate max-w-[150px]" title={ord.notes}>
+                          {ord.notes}
+                        </span>
+                      )}
                     </td>
 
                     <td className="py-3 px-4">
@@ -228,6 +233,34 @@ export const AdminOrders: React.FC = () => {
               <button onClick={() => setSelectedOrder(null)} className="text-slate-400 hover:text-slate-700">
                 <X className="w-5 h-5" />
               </button>
+            </div>
+
+            {selectedOrder.notes && (
+              <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-[11px] leading-relaxed">
+                <strong className="block font-bold mb-0.5">Payment / Order Note:</strong>
+                <span>{selectedOrder.notes}</span>
+              </div>
+            )}
+
+            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] space-y-1">
+              <div className="flex justify-between">
+                <span className="text-slate-500">Total Order Amount:</span>
+                <span className="font-bold text-slate-900">{formatINR(selectedOrder.totalAmount)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">Payment Mode:</span>
+                <span className="font-semibold text-slate-800">{selectedOrder.paymentMethod}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">Customer Phone:</span>
+                <span className="font-mono text-slate-800 font-semibold">{selectedOrder.address?.phone}</span>
+              </div>
+              {selectedOrder.address && (
+                <div className="pt-1 text-slate-600 border-t border-slate-200/60 mt-1">
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Delivery Address:</span>
+                  <span>{selectedOrder.address.addressLine}, {selectedOrder.address.city}, {selectedOrder.address.state} - {selectedOrder.address.pinCode}</span>
+                </div>
+              )}
             </div>
 
             <form onSubmit={handleUpdateStatus} className="space-y-4 text-xs">

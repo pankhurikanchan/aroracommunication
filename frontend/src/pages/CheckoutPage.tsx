@@ -19,6 +19,9 @@ import {
   Banknote,
   Check,
   AlertCircle,
+  Copy,
+  CheckCheck,
+  Smartphone,
 } from 'lucide-react';
 
 export const CheckoutPage: React.FC = () => {
@@ -50,6 +53,13 @@ export const CheckoutPage: React.FC = () => {
   const [selectedBank, setSelectedBank] = useState('HDFC Bank');
   const [placingOrder, setPlacingOrder] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  const handleCopy = (text: string, key: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2000);
+  };
 
   // Fetch saved addresses if logged in
   useEffect(() => {
@@ -109,7 +119,14 @@ export const CheckoutPage: React.FC = () => {
         orderAddressData.shippingAddress = addressForm;
       }
 
-      // Prepare order payload
+      // Prepare order payload notes
+      let paymentNotes = `Selected payment via ${paymentMethod}`;
+      if (paymentMethod === 'UPI') {
+        paymentNotes = `Direct UPI to Owner (ARORA MOBILES & GADGET HUB / 7300791957@kotak). Total: ${formatINR(finalTotal)}. Verified direct order.`;
+      } else if (paymentMethod === 'NET_BANKING') {
+        paymentNotes = `Direct Bank Transfer to Kotak A/C 5949282265 (IFSC: KKBK0005321). Total: ${formatINR(finalTotal)}. Verified direct order.`;
+      }
+
       const orderPayload = {
         ...orderAddressData,
         items: cart.items.map((i) => ({
@@ -122,7 +139,7 @@ export const CheckoutPage: React.FC = () => {
         })),
         paymentMethod,
         couponCode: coupon?.code || null,
-        notes: `Selected payment via ${paymentMethod}`,
+        notes: paymentNotes,
       };
 
       const res = await api.post('/orders', orderPayload);
@@ -140,6 +157,9 @@ export const CheckoutPage: React.FC = () => {
       setPlacingOrder(false);
     }
   };
+
+  const upiPayLink = `upi://pay?pa=7300791957@kotak&pn=ARORA%20MOBILES%20AND%20GADGET%20HUB&am=${finalTotal}&cu=INR&tn=Arora%20Order`;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(upiPayLink)}`;
 
   const steps = [
     { number: 1, title: 'Login' },
@@ -454,164 +474,319 @@ export const CheckoutPage: React.FC = () => {
               <Lock className="w-4 h-4 text-emerald-600" />
             </div>
 
-            <div className="pt-4 space-y-3">
-              {/* UPI Option */}
+            <div className="pt-4 space-y-4">
+              {/* Option 1: Direct UPI to Store Owner */}
               <label
-                className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition ${
+                className={`p-4 sm:p-5 rounded-2xl border transition block cursor-pointer ${
                   paymentMethod === 'UPI'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-200'
-                    : 'border-slate-200 hover:border-slate-300'
+                    ? 'border-indigo-600 bg-indigo-50/40 ring-2 ring-indigo-200 shadow-sm'
+                    : 'border-slate-200 hover:border-slate-300 bg-white'
                 }`}
               >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={paymentMethod === 'UPI'}
-                  onChange={() => setPaymentMethod('UPI')}
-                  className="mt-1 text-indigo-600 focus:ring-indigo-500"
-                />
-                <div className="flex-1 text-xs">
-                  <div className="flex items-center justify-between font-bold text-slate-900">
-                    <span className="flex items-center gap-1.5">
-                      <QrCode className="w-4 h-4 text-indigo-600" />
-                      UPI (Google Pay, PhonePe, Paytm, BHIM)
-                    </span>
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">
-                      FASTEST
-                    </span>
-                  </div>
-                  <p className="text-slate-500 mt-1">Instant approval with zero transaction fees</p>
-
-                  {paymentMethod === 'UPI' && (
-                    <div className="mt-3 pt-3 border-t border-indigo-100">
-                      <input
-                        type="text"
-                        value={upiId}
-                        onChange={(e) => setUpiId(e.target.value)}
-                        placeholder="Enter UPI ID (e.g. mobile@okhdfcbank / yourname@upi)"
-                        className="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                      />
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="payment"
+                    checked={paymentMethod === 'UPI'}
+                    onChange={() => setPaymentMethod('UPI')}
+                    className="mt-1 text-indigo-600 focus:ring-indigo-500 shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 font-bold text-slate-900">
+                      <span className="flex items-center gap-2 text-sm">
+                        <QrCode className="w-4 h-4 text-indigo-600 shrink-0" />
+                        Direct UPI Transfer to Arora Mobiles
+                      </span>
+                      <span className="text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                        ⚡ Recommended & Fastest
+                      </span>
                     </div>
-                  )}
-                </div>
-              </label>
-
-              {/* Credit Card Option */}
-              <label
-                className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition ${
-                  paymentMethod === 'CREDIT_CARD'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-200'
-                    : 'border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={paymentMethod === 'CREDIT_CARD'}
-                  onChange={() => setPaymentMethod('CREDIT_CARD')}
-                  className="mt-1 text-indigo-600 focus:ring-indigo-500"
-                />
-                <div className="flex-1 text-xs">
-                  <div className="flex items-center justify-between font-bold text-slate-900">
-                    <span className="flex items-center gap-1.5">
-                      <CreditCard className="w-4 h-4 text-blue-600" />
-                      Credit Card (Visa, MasterCard, RuPay, Diners)
-                    </span>
+                    <p className="text-slate-500 text-xs mt-1">
+                      Pay directly to <strong>ARORA MOBILES & GADGET HUB</strong> using Google Pay, PhonePe, Paytm, BHIM, Cred, or any UPI app.
+                    </p>
                   </div>
-                  <p className="text-slate-500 mt-1">Safe gateway encryption. Card details are NEVER stored in our database.</p>
                 </div>
-              </label>
 
-              {/* Debit Card Option */}
-              <label
-                className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition ${
-                  paymentMethod === 'DEBIT_CARD'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-200'
-                    : 'border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={paymentMethod === 'DEBIT_CARD'}
-                  onChange={() => setPaymentMethod('DEBIT_CARD')}
-                  className="mt-1 text-indigo-600 focus:ring-indigo-500"
-                />
-                <div className="flex-1 text-xs">
-                  <div className="flex items-center justify-between font-bold text-slate-900">
-                    <span className="flex items-center gap-1.5">
-                      <CreditCard className="w-4 h-4 text-purple-600" />
-                      Debit Card / ATM Card
-                    </span>
+                {paymentMethod === 'UPI' && (
+                  <div className="mt-4 pt-4 border-t border-indigo-100/80 space-y-4">
+                    {/* Mobile 1-Tap Intent Button */}
+                    <a
+                      href={upiPayLink}
+                      className="sm:hidden flex items-center justify-center gap-2 w-full py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs rounded-xl shadow-md transition"
+                    >
+                      <Smartphone className="w-4 h-4" />
+                      <span>Tap to Pay {formatINR(finalTotal)} in UPI App</span>
+                    </a>
+
+                    {/* QR Code & Copyable IDs Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-white p-4 rounded-xl border border-indigo-100 shadow-xs">
+                      {/* Left: Dynamic QR Code */}
+                      <div className="md:col-span-5 flex flex-col items-center text-center">
+                        <div className="p-2 bg-white rounded-2xl border-2 border-indigo-200 shadow-sm relative group">
+                          <img
+                            src={qrCodeUrl}
+                            alt="Scan UPI QR Code"
+                            className="w-40 h-40 object-contain rounded-lg"
+                          />
+                        </div>
+                        <span className="text-[11px] font-bold text-slate-700 mt-2 block">
+                          Scan with Any UPI App
+                        </span>
+                        <span className="text-[10px] text-indigo-600 font-semibold">
+                          Amount preloaded: {formatINR(finalTotal)}
+                        </span>
+                      </div>
+
+                      {/* Right: Copyable UPI IDs */}
+                      <div className="md:col-span-7 space-y-2.5">
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/90 flex items-center justify-between gap-2">
+                          <div className="min-w-0">
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">
+                              Primary Kotak UPI ID
+                            </span>
+                            <span className="font-mono font-bold text-slate-900 text-xs truncate block">
+                              7300791957@kotak
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleCopy('7300791957@kotak', 'kotak-upi');
+                            }}
+                            className="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[11px] flex items-center gap-1.5 transition shrink-0"
+                          >
+                            {copiedKey === 'kotak-upi' ? (
+                              <>
+                                <CheckCheck className="w-3.5 h-3.5 text-emerald-600" />
+                                <span className="text-emerald-700">Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/90 flex items-center justify-between gap-2">
+                          <div className="min-w-0">
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">
+                              Alternate PhonePe UPI ID
+                            </span>
+                            <span className="font-mono font-bold text-slate-900 text-xs truncate block">
+                              Phonepe7300791957-2@axl
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleCopy('Phonepe7300791957-2@axl', 'phonepe-upi');
+                            }}
+                            className="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[11px] flex items-center gap-1.5 transition shrink-0"
+                          >
+                            {copiedKey === 'phonepe-upi' ? (
+                              <>
+                                <CheckCheck className="w-3.5 h-3.5 text-emerald-600" />
+                                <span className="text-emerald-700">Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        <div className="px-1 text-[11px] text-slate-500">
+                          <span>Payee Name: </span>
+                          <strong className="text-slate-800">ARORA MOBILES & GADGET HUB</strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Reassurance Banner: No 12-digit proof required! */}
+                    <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-900 flex items-start gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div className="text-[11px] leading-relaxed">
+                        <strong className="text-emerald-950 font-bold block mb-0.5">
+                          ✓ No 12-digit UTR or Reference Number Required!
+                        </strong>
+                        Simply complete the payment in your UPI app or scan the QR code, then click <strong>"Place Order"</strong> below. Our store admin team matches the incoming transaction with your order total in real-time.
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-slate-500 mt-1">Direct bank debit with verified OTP.</p>
-                </div>
+                )}
               </label>
 
-              {/* Net Banking */}
+              {/* Option 2: Direct Bank Account Transfer */}
               <label
-                className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition ${
+                className={`p-4 sm:p-5 rounded-2xl border transition block cursor-pointer ${
                   paymentMethod === 'NET_BANKING'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-200'
-                    : 'border-slate-200 hover:border-slate-300'
+                    ? 'border-indigo-600 bg-indigo-50/40 ring-2 ring-indigo-200 shadow-sm'
+                    : 'border-slate-200 hover:border-slate-300 bg-white'
                 }`}
               >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={paymentMethod === 'NET_BANKING'}
-                  onChange={() => setPaymentMethod('NET_BANKING')}
-                  className="mt-1 text-indigo-600 focus:ring-indigo-500"
-                />
-                <div className="flex-1 text-xs">
-                  <div className="flex items-center justify-between font-bold text-slate-900">
-                    <span className="flex items-center gap-1.5">
-                      <Building className="w-4 h-4 text-cyan-600" />
-                      Net Banking (50+ Indian Banks)
-                    </span>
-                  </div>
-                  {paymentMethod === 'NET_BANKING' && (
-                    <div className="mt-3 pt-3 border-t border-indigo-100">
-                      <select
-                        value={selectedBank}
-                        onChange={(e) => setSelectedBank(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-xs"
-                      >
-                        <option>HDFC Bank</option>
-                        <option>State Bank of India (SBI)</option>
-                        <option>ICICI Bank</option>
-                        <option>Axis Bank</option>
-                        <option>Kotak Mahindra Bank</option>
-                        <option>Punjab National Bank</option>
-                      </select>
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="payment"
+                    checked={paymentMethod === 'NET_BANKING'}
+                    onChange={() => setPaymentMethod('NET_BANKING')}
+                    className="mt-1 text-indigo-600 focus:ring-indigo-500 shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 font-bold text-slate-900">
+                      <span className="flex items-center gap-2 text-sm">
+                        <Building className="w-4 h-4 text-blue-600 shrink-0" />
+                        Direct Bank Transfer (IMPS / NEFT / RTGS to Kotak Bank)
+                      </span>
+                      <span className="text-[10px] bg-blue-100 text-blue-800 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        Kotak Mahindra Bank
+                      </span>
                     </div>
-                  )}
+                    <p className="text-slate-500 text-xs mt-1">
+                      Transfer directly to the official current bank account of Arora Mobiles & Gadget Hub.
+                    </p>
+                  </div>
+                </div>
+
+                {paymentMethod === 'NET_BANKING' && (
+                  <div className="mt-4 pt-4 border-t border-indigo-100/80 space-y-4">
+                    <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                          <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                            Account Holder Name
+                          </span>
+                          <span className="font-bold text-slate-900 text-xs">
+                            ARORA MOBILES & GADGET HUB
+                          </span>
+                        </div>
+
+                        <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                              Account Number
+                            </span>
+                            <span className="font-mono font-bold text-slate-900 text-xs">
+                              5949282265
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleCopy('5949282265', 'acc-num');
+                            }}
+                            className="px-2.5 py-1 rounded bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[10px] flex items-center gap-1 transition"
+                          >
+                            {copiedKey === 'acc-num' ? 'Copied!' : 'Copy'}
+                          </button>
+                        </div>
+
+                        <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                              IFSC Code
+                            </span>
+                            <span className="font-mono font-bold text-slate-900 text-xs">
+                              KKBK0005321
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleCopy('KKBK0005321', 'ifsc-code');
+                            }}
+                            className="px-2.5 py-1 rounded bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-[10px] flex items-center gap-1 transition"
+                          >
+                            {copiedKey === 'ifsc-code' ? 'Copied!' : 'Copy'}
+                          </button>
+                        </div>
+
+                        <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                          <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                            Bank & Branch
+                          </span>
+                          <span className="font-bold text-slate-900 text-xs">
+                            Kotak Mahindra Bank, Bareilly Branch
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 flex items-start gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                      <div className="text-[11px] leading-relaxed">
+                        <strong>Hassle-Free Bank Order:</strong> Transfer <strong>{formatINR(finalTotal)}</strong> from your bank app, then click <strong>"Place Order"</strong> below. No deposit slip or transaction upload needed.
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </label>
+
+              {/* Option 3: Cash on Delivery */}
+              <label
+                className={`p-4 rounded-2xl border transition block cursor-pointer ${
+                  paymentMethod === 'CASH_ON_DELIVERY'
+                    ? 'border-indigo-600 bg-indigo-50/40 ring-2 ring-indigo-200 shadow-sm'
+                    : 'border-slate-200 hover:border-slate-300 bg-white'
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="payment"
+                    checked={paymentMethod === 'CASH_ON_DELIVERY'}
+                    onChange={() => setPaymentMethod('CASH_ON_DELIVERY')}
+                    className="mt-1 text-indigo-600 focus:ring-indigo-500 shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span className="flex items-center gap-2 text-sm">
+                        <Banknote className="w-4 h-4 text-emerald-600 shrink-0" />
+                        Cash on Delivery (Pay at Doorstep)
+                      </span>
+                    </div>
+                    <p className="text-slate-500 text-xs mt-1">
+                      Pay with cash or UPI QR directly to the courier agent when your package is delivered.
+                    </p>
+                  </div>
                 </div>
               </label>
 
-              {/* Cash on Delivery */}
+              {/* Option 4: Debit / Credit Card */}
               <label
-                className={`p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition ${
-                  paymentMethod === 'CASH_ON_DELIVERY'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-200'
-                    : 'border-slate-200 hover:border-slate-300'
+                className={`p-4 rounded-2xl border transition block cursor-pointer ${
+                  paymentMethod === 'CREDIT_CARD'
+                    ? 'border-indigo-600 bg-indigo-50/40 ring-2 ring-indigo-200 shadow-sm'
+                    : 'border-slate-200 hover:border-slate-300 bg-white'
                 }`}
               >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={paymentMethod === 'CASH_ON_DELIVERY'}
-                  onChange={() => setPaymentMethod('CASH_ON_DELIVERY')}
-                  className="mt-1 text-indigo-600 focus:ring-indigo-500"
-                />
-                <div className="flex-1 text-xs">
-                  <div className="flex items-center justify-between font-bold text-slate-900">
-                    <span className="flex items-center gap-1.5">
-                      <Banknote className="w-4 h-4 text-emerald-600" />
-                      Cash on Delivery (Pay at Doorstep)
-                    </span>
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="payment"
+                    checked={paymentMethod === 'CREDIT_CARD'}
+                    onChange={() => setPaymentMethod('CREDIT_CARD')}
+                    className="mt-1 text-indigo-600 focus:ring-indigo-500 shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span className="flex items-center gap-2 text-sm">
+                        <CreditCard className="w-4 h-4 text-indigo-600 shrink-0" />
+                        Debit / Credit Card (Visa, MasterCard, RuPay)
+                      </span>
+                    </div>
+                    <p className="text-slate-500 text-xs mt-1">
+                      Safe gateway checkout with 256-bit encryption. Card details are never stored.
+                    </p>
                   </div>
-                  <p className="text-slate-500 mt-1">Pay with cash or UPI QR directly to the courier agent upon arrival.</p>
                 </div>
               </label>
             </div>

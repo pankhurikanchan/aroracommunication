@@ -36,9 +36,9 @@ export const LoginPage: React.FC = () => {
   const handleDirectOwnerLogin = async () => {
     setError(null);
     setLoading(true);
-    setEmail('admin@aroracommunication.com');
-    setPassword('Admin@123');
-    const res = await login('admin@aroracommunication.com', 'Admin@123');
+    setEmail('pankhuri@aroramobilehub.com');
+    setPassword('Pankhuri@Arora2026');
+    const res = await login('pankhuri@aroramobilehub.com', 'Pankhuri@Arora2026');
     setLoading(false);
     if (res.success) {
       navigate('/admin');
@@ -48,8 +48,8 @@ export const LoginPage: React.FC = () => {
   };
 
   const handleDemoAdmin = () => {
-    setEmail('admin@aroracommunication.com');
-    setPassword('Admin@123');
+    setEmail('pankhuri@aroramobilehub.com');
+    setPassword('Pankhuri@Arora2026');
   };
 
   const handleDemoCustomer = () => {
@@ -128,10 +128,10 @@ export const LoginPage: React.FC = () => {
         <div className="pt-2 border-t border-slate-100 space-y-2">
           <div className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-indigo-500/10 to-purple-500/10 border border-amber-300/70 text-center">
             <span className="text-[11px] font-extrabold uppercase text-amber-900 block tracking-wider">
-              👑 Shop Owner / Admin Access
+              👑 Store Owner & Administrator: Pankhuri Kanchan
             </span>
             <p className="text-[11px] text-slate-600 mt-0.5 mb-2.5">
-              Access product management, view customer orders & update shipping
+              Access product catalog management, view customer orders & update shipping statuses
             </p>
             <button
               type="button"
@@ -140,7 +140,7 @@ export const LoginPage: React.FC = () => {
               className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-700 hover:to-indigo-700 text-white font-extrabold text-xs shadow-md transition flex items-center justify-center gap-2 hover:scale-[1.01]"
             >
               <ShieldCheck className="w-4 h-4 text-amber-200" />
-              <span>Launch Owner Admin Panel</span>
+              <span>Launch Pankhuri Kanchan Admin Panel</span>
             </button>
           </div>
 
@@ -150,7 +150,7 @@ export const LoginPage: React.FC = () => {
               onClick={handleDemoAdmin}
               className="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold border border-indigo-200 transition text-[11px]"
             >
-              Fill Admin Creds
+              Fill Pankhuri Admin Creds
             </button>
             <button
               type="button"

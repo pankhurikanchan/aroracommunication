@@ -203,10 +203,15 @@ export const OrderSuccessPage: React.FC = () => {
               <span>Total Paid:</span>
               <span className="text-indigo-700">{formatINR(order.totalAmount)}</span>
             </div>
-            <div className="pt-1">
+            <div className="pt-1 flex flex-col gap-1.5">
               <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                Payment Status: {order.paymentStatus}
+                Payment Status: {order.paymentStatus} &bull; {order.paymentMethod.replace(/_/g, ' ')}
               </span>
+              {order.notes && (
+                <p className="text-[11px] text-slate-500 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  {order.notes}
+                </p>
+              )}
             </div>
           </div>
         </div>
