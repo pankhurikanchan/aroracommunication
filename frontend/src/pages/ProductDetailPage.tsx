@@ -21,13 +21,19 @@ import {
   MapPin,
   MessageSquare,
   Sparkles,
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
 } from 'lucide-react';
+
+import { useToast } from '../context/ToastContext';
 
 export const ProductDetailPage: React.FC = () => {
   const { identifier } = useParams<{ identifier: string }>();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { user } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const [product, setProduct] = useState<Product | null>(null);
@@ -39,12 +45,17 @@ export const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [addedNotice, setAddedNotice] = useState(false);
 
+  // Delivery Pincode checker state
+  const [pincode, setPincode] = useState('');
+  const [pincodeVerified, setPincodeVerified] = useState(false);
+
   // Review submission state
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewTitle, setReviewTitle] = useState('');
   const [reviewComment, setReviewComment] = useState('');
   const [submittingReview, setSubmittingReview] = useState(false);
   const [reviewMessage, setReviewMessage] = useState<string | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -117,12 +128,20 @@ export const ProductDetailPage: React.FC = () => {
   const handleAddToCart = async () => {
     await addToCart(product.id, selectedVariant?.id || null, quantity);
     setAddedNotice(true);
+    showToast(`Added ${quantity}x "${product.name}" to cart successfully`, 'success');
     setTimeout(() => setAddedNotice(false), 2500);
   };
 
   const handleBuyNow = async () => {
     await addToCart(product.id, selectedVariant?.id || null, quantity);
     navigate('/checkout');
+  };
+
+  const handleCheckPincode = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pincode.trim().length === 6) {
+      setPincodeVerified(true);
+    }
   };
 
   const handleReviewSubmit = async (e: React.FormEvent) => {
@@ -169,7 +188,7 @@ export const ProductDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 py-6 space-y-12 pb-24 lg:pb-12">
       {/* Breadcrumbs */}
       <nav className="text-xs text-slate-500 flex items-center gap-2 flex-wrap">
         <Link to="/" className="hover:text-indigo-600">Home</Link>
@@ -420,13 +439,46 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           {/* Delivery & Pincode Checker */}
-          <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2 text-xs">
+          <div className="p-4 rounded-2xl border border-slate-200 bg-slate-50/80 space-y-3 text-xs">
             <div className="flex items-center gap-2 text-slate-800 font-bold">
               <MapPin className="w-4 h-4 text-indigo-600" />
-              <span>Doorstep Delivery Across India:</span>
+              <span>Check Delivery & Cash on Delivery:</span>
             </div>
-            <p className="text-slate-600 text-xs">
-              {product.deliveryInfo || 'Fast express delivery in 2-3 business days. Same day delivery available in Delhi-NCR.'}
+
+            <form onSubmit={handleCheckPincode} className="flex gap-2">
+              <input
+                type="text"
+                maxLength={6}
+                value={pincode}
+                onChange={(e) => {
+                  setPincode(e.target.value.replace(/\D/g, ''));
+                  setPincodeVerified(false);
+                }}
+                placeholder="Enter 6-digit Pincode (e.g. 201301)"
+                className="w-full max-w-[220px] px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition"
+              >
+                Check
+              </button>
+            </form>
+
+            {pincodeVerified && (
+              <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 space-y-1 animate-in fade-in">
+                <div className="flex items-center gap-1.5 font-bold">
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Delivery Available to PIN {pincode}</span>
+                </div>
+                <p className="text-[11px] text-emerald-700">
+                  Estimated delivery in 2-3 business days &bull; Free Shipping Eligible &bull; COD Available
+                </p>
+              </div>
+            )}
+
+            <p className="text-slate-500 text-[11px] leading-relaxed">
+              {product.deliveryInfo || 'Fast express pan-India dispatch. Orders placed before 2:00 PM are dispatched on the same day with tracking updates.'}
             </p>
           </div>
         </div>
@@ -634,6 +686,100 @@ export const ProductDetailPage: React.FC = () => {
           </div>
         </section>
       )}
+
+      {/* Frequently Asked Questions */}
+      <section className="bg-slate-50/80 rounded-3xl p-6 sm:p-8 border border-slate-200/80 space-y-5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+            <HelpCircle className="w-5 h-5" />
+          </div>
+          <div>
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+            <p className="text-xs text-slate-500">Got questions about this product or purchasing from Arora Communication?</p>
+          </div>
+        </div>
+
+        <div className="space-y-3 pt-1">
+          {[
+            {
+              q: 'Is this product 100% genuine and covered by brand warranty?',
+              a: 'Yes, every product sold on Arora Communication is 100% brand authentic and brand-new in original retail packaging. It is backed by official manufacturer warranty valid across all authorized service centers nationwide.'
+            },
+            {
+              q: 'What is Arora Communication\'s replacement & return policy?',
+              a: 'We offer a hassle-free 7-day replacement guarantee in the rare case you receive a defective or damaged product. Our dedicated customer care will arrange pickup and express replacement.'
+            },
+            {
+              q: 'Is Cash on Delivery (COD) supported?',
+              a: 'Yes! We support Cash on Delivery across most serviceable pincodes across India. You can select Cash on Delivery during checkout.'
+            },
+            {
+              q: 'How fast will my order be shipped?',
+              a: 'Orders are dispatched within 24 hours via premium express couriers (Bluedart, Delhivery, DTDC). Metro deliveries usually take 24–48 hours, while other areas take 2–4 business days.'
+            },
+            {
+              q: 'Can I get a GST tax invoice for business expense?',
+              a: 'Yes, full tax invoices with GST breakups are generated automatically and sent to your email with your order confirmation.'
+            }
+          ].map((faq, index) => {
+            const isOpen = openFaqIndex === index;
+            return (
+              <div
+                key={index}
+                className="bg-white rounded-2xl border border-slate-200 overflow-hidden transition-all duration-200 shadow-sm"
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                  className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bold text-sm text-slate-900 hover:text-indigo-600 transition"
+                >
+                  <span>{faq.q}</span>
+                  {isOpen ? (
+                    <ChevronUp className="w-4 h-4 text-indigo-600 shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                  )}
+                </button>
+                {isOpen && (
+                  <div className="px-5 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Sticky Mobile Purchase Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200/80 p-3 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Special Price</div>
+          <div className="text-base font-black text-slate-900 truncate">₹{currentPrice.toLocaleString('en-IN')}</div>
+          {hasDiscount && (
+            <div className="text-[10px] text-emerald-600 font-bold truncate">
+              Save ₹{(originalPrice - currentPrice).toLocaleString('en-IN')}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={handleAddToCart}
+            disabled={product.stockQuantity === 0}
+            className="px-4 py-2.5 rounded-xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-bold text-xs flex items-center gap-1.5 transition disabled:opacity-50"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            <span>Add</span>
+          </button>
+          <button
+            onClick={handleBuyNow}
+            disabled={product.stockQuantity === 0}
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-xs shadow-md transition disabled:opacity-50"
+          >
+            Buy Now
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

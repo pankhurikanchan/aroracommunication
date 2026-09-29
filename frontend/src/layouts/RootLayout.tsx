@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
+import { FloatingConcierge } from '../components/common/FloatingConcierge';
 
 export const RootLayout: React.FC = () => {
   return (
@@ -11,6 +12,8 @@ export const RootLayout: React.FC = () => {
         <Outlet />
       </main>
       <Footer />
+      <FloatingConcierge />
     </div>
   );
 };
+

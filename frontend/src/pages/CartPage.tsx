@@ -94,6 +94,41 @@ export const CartPage: React.FC = () => {
         </button>
       </div>
 
+      {/* Free Delivery Progress Bar */}
+      <div className="mb-6 p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <Truck className="w-5 h-5" />
+          </div>
+          <div className="flex-1">
+            {subtotal >= 1000 ? (
+              <p className="text-xs sm:text-sm font-bold text-indigo-950">
+                🎉 Congratulations! You have unlocked <span className="text-emerald-600 font-extrabold">FREE Express Delivery</span>.
+              </p>
+            ) : (
+              <p className="text-xs sm:text-sm font-bold text-slate-800">
+                Add <span className="text-indigo-600 font-extrabold">{formatINR(1000 - subtotal)}</span> more to unlock <span className="text-indigo-600 font-bold">FREE Delivery</span>!
+              </p>
+            )}
+            <div className="w-full sm:w-64 bg-slate-200 rounded-full h-2 mt-1.5 overflow-hidden">
+              <div
+                className="bg-indigo-600 h-2 rounded-full transition-all duration-500"
+                style={{ width: `${Math.min(100, Math.round((subtotal / 1000) * 100))}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {subtotal < 1000 && (
+          <Link
+            to="/products"
+            className="text-xs font-bold text-indigo-600 hover:text-indigo-800 underline shrink-0"
+          >
+            Add items &rarr;
+          </Link>
+        )}
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Items List (8 cols) */}
         <div className="lg:col-span-8 space-y-4">
@@ -255,8 +290,28 @@ export const CartPage: React.FC = () => {
                   </div>
                 )}
 
-                <div className="pt-1 text-[11px] text-slate-500">
-                  Tip: Use coupon <code className="text-indigo-600 font-bold">ARORA10</code> for 10% off!
+                <div className="pt-2 text-[11px] text-slate-500 flex flex-wrap items-center gap-1.5">
+                  <span>Available offers:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCouponCode('ARORA10');
+                      applyCoupon('ARORA10');
+                    }}
+                    className="font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded hover:bg-indigo-100 transition cursor-pointer"
+                  >
+                    ARORA10 (10% OFF)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCouponCode('WELCOME500');
+                      applyCoupon('WELCOME500');
+                    }}
+                    className="font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded hover:bg-emerald-100 transition cursor-pointer"
+                  >
+                    WELCOME500 (₹500 OFF)
+                  </button>
                 </div>
               </form>
             )}
