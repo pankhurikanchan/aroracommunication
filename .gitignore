@@ -18,6 +18,7 @@ build/
 backend/dist/
 frontend/dist/
 *.tsbuildinfo
+*.docx
 
 # Environment & Secret files (CRITICAL: Never commit secrets)
 .env
