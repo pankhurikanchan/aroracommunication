@@ -60,22 +60,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="group relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 hover:border-indigo-400/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1">
-      {/* Top Floating Badges & Wishlist Button */}
-      <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-10 pointer-events-none">
+    <div className="group relative bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-slate-200/90 hover:border-indigo-400 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between overflow-hidden card-3d-wrapper perspective-1000">
+      {/* 3D Specular Light Glare Overlay */}
+      <div className="shine-overlay rounded-2xl sm:rounded-3xl z-20 pointer-events-none" />
+
+      {/* Ambient Glow Aura on Hover */}
+      <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-indigo-500/20 via-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none -z-10" />
+
+      {/* Top Floating Badges & Wishlist Button with 3D Elevation */}
+      <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-10 pointer-events-none" style={{ transform: 'translateZ(20px)' }}>
         <div className="flex flex-col gap-1 items-start">
           {product.isBestSeller && (
-            <span className="px-2.5 py-0.5 rounded-md bg-amber-500 text-slate-950 font-black text-[9px] sm:text-[10px] shadow-sm uppercase tracking-wider">
+            <span className="px-2.5 py-0.5 rounded-md bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-[9px] sm:text-[10px] shadow-sm uppercase tracking-wider animate-pulse-subtle">
               BESTSELLER
             </span>
           )}
           {product.discountPercentage && product.discountPercentage > 0 && (
-            <span className="px-2 py-0.5 rounded-md bg-rose-600 text-white font-extrabold text-[10px] sm:text-[11px] shadow-sm">
+            <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-rose-600 to-red-600 text-white font-extrabold text-[10px] sm:text-[11px] shadow-md">
               {product.discountPercentage}% OFF
             </span>
           )}
           {product.isNewArrival && !product.isBestSeller && (
-            <span className="px-2 py-0.5 rounded-md bg-indigo-600 text-white font-extrabold text-[9px] sm:text-[10px] shadow-sm uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-extrabold text-[9px] sm:text-[10px] shadow-sm uppercase tracking-wider">
               NEW
             </span>
           )}
@@ -96,14 +102,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </button>
       </div>
 
-      {/* Product Image Area with Hover Quick View */}
-      <div className="relative pt-[84%] overflow-hidden bg-slate-50/70 border-b border-slate-100">
+      {/* Product Image Area with 3D Elevation & Quick View */}
+      <div className="relative pt-[84%] overflow-hidden bg-slate-50/80 border-b border-slate-100">
         <Link to={`/products/${product.slug}`} className="block absolute inset-0">
           <img
             src={primaryImage}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="w-full h-full object-contain p-4 group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-500 ease-out"
           />
         </Link>
 

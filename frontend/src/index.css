@@ -72,3 +72,140 @@
 .text-glow-indigo {
   text-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
 }
+
+/* ===================================================
+   3D PERSPECTIVE, ANIMATIONS & GLOW STYLES
+   =================================================== */
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-800 {
+  perspective: 800px;
+}
+.perspective-600 {
+  perspective: 600px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+@keyframes floatSlow3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-16px) rotate(2deg) scale(1.04);
+  }
+  66% {
+    transform: translateY(-8px) rotate(-2deg) scale(0.98);
+  }
+}
+
+@keyframes floatReverse3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(16px) rotate(-3deg) scale(0.96);
+  }
+  66% {
+    transform: translateY(7px) rotate(2deg) scale(1.03);
+  }
+}
+
+@keyframes rotateCube3D {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg) rotateZ(90deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes holographicShimmer {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes neonGlowPulse {
+  0%, 100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 18px rgba(99, 102, 241, 0.45));
+  }
+  50% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.8));
+  }
+}
+
+@keyframes gridHorizonMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 80px;
+  }
+}
+
+.animate-float-slow-3d {
+  animation: floatSlow3D 12s ease-in-out infinite;
+}
+
+.animate-float-reverse-3d {
+  animation: floatReverse3D 15s ease-in-out infinite;
+}
+
+.animate-rotate-cube-3d {
+  animation: rotateCube3D 22s linear infinite;
+}
+
+.animate-neon-pulse {
+  animation: neonGlowPulse 4s ease-in-out infinite;
+}
+
+.grid-horizon-3d {
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(600px) rotateX(60deg);
+  transform-origin: top center;
+  animation: gridHorizonMove 15s linear infinite;
+}
+
+/* Interactive 3D Card Hover & Shine */
+.card-3d-wrapper {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d-wrapper:hover {
+  transform: translateY(-8px) rotateX(3deg) rotateY(-2deg) scale(1.015);
+}
+
+.shine-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-3d-wrapper:hover .shine-overlay {
+  opacity: 1;
+}

@@ -152,21 +152,25 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
         </Link>
       </div>
 
-      {/* 3. Category Grid with Modern Card Visuals */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+      {/* 3. Category Grid with 3D Perspective & Motion */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 perspective-1000">
         {categories.slice(0, 12).map((cat) => {
           const details = getCategoryDetails(cat.slug);
           return (
             <Link
               key={cat.id}
               to={`/category/${cat.slug}`}
-              className={`group relative bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center hover:-translate-y-1.5 ${details.glow} overflow-hidden`}
+              className={`group relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center card-3d-wrapper preserve-3d ${details.glow} overflow-hidden`}
             >
-              {/* Subtle card top gradient accent */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/0 to-transparent group-hover:via-indigo-500 transition-all duration-300" />
+              {/* 3D Light Sheen Overlay */}
+              <div className="shine-overlay rounded-2xl" />
+
+              {/* Card top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/0 to-transparent group-hover:via-indigo-500 transition-all duration-500" />
 
               <div
-                className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 mb-3 group-hover:scale-110 shadow-sm ${details.bg}`}
+                className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 mb-3 group-hover:scale-115 group-hover:rotate-[-4deg] shadow-sm group-hover:shadow-lg ${details.bg}`}
+                style={{ transform: 'translateZ(15px)' }}
               >
                 {details.icon}
               </div>
