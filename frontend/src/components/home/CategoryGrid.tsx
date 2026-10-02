@@ -1,104 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Smartphone,
-  Tablet,
-  Laptop,
-  Watch,
-  Headphones,
-  Zap,
-  BatteryCharging,
-  Shield,
-  Speaker,
-  Tv,
-  Cpu,
-  ArrowRight,
-  Flame,
-  Sparkles,
-} from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Category } from '../../types';
+import { getAnimatedCategoryIcon } from './CategoryIcons';
 
 interface CategoryGridProps {
   categories: Category[];
 }
 
 export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
-  const getCategoryDetails = (slug: string) => {
-    switch (slug) {
-      case 'smartphones':
-      case 'iphones':
-      case 'android-phones':
-        return {
-          icon: <Smartphone className="w-6 h-6 text-indigo-600" />,
-          bg: 'bg-indigo-50 group-hover:bg-indigo-600 group-hover:text-white',
-          glow: 'group-hover:border-indigo-400',
-        };
-      case 'tablets':
-        return {
-          icon: <Tablet className="w-6 h-6 text-cyan-600" />,
-          bg: 'bg-cyan-50 group-hover:bg-cyan-600 group-hover:text-white',
-          glow: 'group-hover:border-cyan-400',
-        };
-      case 'laptops':
-        return {
-          icon: <Laptop className="w-6 h-6 text-blue-600" />,
-          bg: 'bg-blue-50 group-hover:bg-blue-600 group-hover:text-white',
-          glow: 'group-hover:border-blue-400',
-        };
-      case 'smartwatches':
-        return {
-          icon: <Watch className="w-6 h-6 text-purple-600" />,
-          bg: 'bg-purple-50 group-hover:bg-purple-600 group-hover:text-white',
-          glow: 'group-hover:border-purple-400',
-        };
-      case 'earphones':
-      case 'headphones':
-        return {
-          icon: <Headphones className="w-6 h-6 text-rose-600" />,
-          bg: 'bg-rose-50 group-hover:bg-rose-600 group-hover:text-white',
-          glow: 'group-hover:border-rose-400',
-        };
-      case 'chargers':
-      case 'cables':
-        return {
-          icon: <Zap className="w-6 h-6 text-amber-600" />,
-          bg: 'bg-amber-50 group-hover:bg-amber-600 group-hover:text-white',
-          glow: 'group-hover:border-amber-400',
-        };
-      case 'power-banks':
-        return {
-          icon: <BatteryCharging className="w-6 h-6 text-emerald-600" />,
-          bg: 'bg-emerald-50 group-hover:bg-emerald-600 group-hover:text-white',
-          glow: 'group-hover:border-emerald-400',
-        };
-      case 'mobile-covers':
-      case 'screen-protectors':
-        return {
-          icon: <Shield className="w-6 h-6 text-teal-600" />,
-          bg: 'bg-teal-50 group-hover:bg-teal-600 group-hover:text-white',
-          glow: 'group-hover:border-teal-400',
-        };
-      case 'speakers':
-        return {
-          icon: <Speaker className="w-6 h-6 text-violet-600" />,
-          bg: 'bg-violet-50 group-hover:bg-violet-600 group-hover:text-white',
-          glow: 'group-hover:border-violet-400',
-        };
-      case 'electronics':
-        return {
-          icon: <Tv className="w-6 h-6 text-indigo-500" />,
-          bg: 'bg-indigo-50 group-hover:bg-indigo-600 group-hover:text-white',
-          glow: 'group-hover:border-indigo-400',
-        };
-      default:
-        return {
-          icon: <Cpu className="w-6 h-6 text-slate-600" />,
-          bg: 'bg-slate-100 group-hover:bg-slate-800 group-hover:text-white',
-          glow: 'group-hover:border-slate-400',
-        };
-    }
-  };
-
   const quickPills = [
     { label: 'Smartphones', slug: 'smartphones', emoji: '📱' },
     { label: 'Apple iPhones', slug: 'iphones', emoji: '🍏' },
@@ -121,7 +31,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
             to={pill.slug.startsWith('../') ? pill.slug.replace('../', '/') : `/category/${pill.slug}`}
             className="group shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white border border-slate-200 hover:border-indigo-500 hover:shadow-md transition-all duration-200 text-xs font-bold text-slate-700 hover:text-indigo-600"
           >
-            <span className="text-base group-hover:scale-125 transition-transform duration-200">
+            <span className="text-base group-hover:scale-125 group-hover:rotate-6 transition-transform duration-200">
               {pill.emoji}
             </span>
             <span>{pill.label}</span>
@@ -152,15 +62,15 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
         </Link>
       </div>
 
-      {/* 3. Category Grid with 3D Perspective & Motion */}
+      {/* 3. Category Grid with 3D Perspective & Animated Icons */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 perspective-1000">
         {categories.slice(0, 12).map((cat) => {
-          const details = getCategoryDetails(cat.slug);
+          const details = getAnimatedCategoryIcon(cat.slug);
           return (
             <Link
               key={cat.id}
               to={`/category/${cat.slug}`}
-              className={`group relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center card-3d-wrapper preserve-3d ${details.glow} overflow-hidden`}
+              className={`group relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center card-3d-wrapper preserve-3d ${details.glowColor} overflow-hidden`}
             >
               {/* 3D Light Sheen Overlay */}
               <div className="shine-overlay rounded-2xl" />
@@ -168,8 +78,9 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
               {/* Card top accent line */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/0 to-transparent group-hover:via-indigo-500 transition-all duration-500" />
 
+              {/* Animated Category Icon Container */}
               <div
-                className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 mb-3 group-hover:scale-115 group-hover:rotate-[-4deg] shadow-sm group-hover:shadow-lg ${details.bg}`}
+                className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 mb-3 group-hover:scale-110 group-hover:-translate-y-1 shadow-sm group-hover:shadow-lg ${details.bg}`}
                 style={{ transform: 'translateZ(15px)' }}
               >
                 {details.icon}
@@ -190,3 +101,4 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
     </section>
   );
 };
+

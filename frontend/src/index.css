@@ -209,3 +209,110 @@
 .card-3d-wrapper:hover .shine-overlay {
   opacity: 1;
 }
+
+/* Tech Category Icons Keyframe Animations */
+@keyframes iconFloatSoft {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes soundwaveEq {
+  0%, 100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes pulseGlowSoft {
+  0%, 100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes batteryChargeSeq {
+  0%, 20% {
+    opacity: 0.25;
+  }
+  50%, 100% {
+    opacity: 1;
+  }
+}
+
+@keyframes heartbeatPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.25);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes radarWave {
+  0% {
+    r: 6;
+    opacity: 0.8;
+  }
+  100% {
+    r: 16;
+    opacity: 0;
+  }
+}
+
+.animate-icon-float {
+  animation: iconFloatSoft 3.2s ease-in-out infinite;
+}
+
+.animate-eq-1 {
+  animation: soundwaveEq 0.85s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.animate-eq-2 {
+  animation: soundwaveEq 0.65s ease-in-out infinite 0.15s;
+  transform-origin: bottom;
+}
+.animate-eq-3 {
+  animation: soundwaveEq 1.05s ease-in-out infinite 0.3s;
+  transform-origin: bottom;
+}
+.animate-eq-4 {
+  animation: soundwaveEq 0.75s ease-in-out infinite 0.1s;
+  transform-origin: bottom;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlowSoft 2.4s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeatPulse 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-battery-dot-1 {
+  animation: batteryChargeSeq 1.5s ease-in-out infinite 0s;
+}
+.animate-battery-dot-2 {
+  animation: batteryChargeSeq 1.5s ease-in-out infinite 0.3s;
+}
+.animate-battery-dot-3 {
+  animation: batteryChargeSeq 1.5s ease-in-out infinite 0.6s;
+}
+.animate-battery-dot-4 {
+  animation: batteryChargeSeq 1.5s ease-in-out infinite 0.9s;
+}
+
