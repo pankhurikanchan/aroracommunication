@@ -583,114 +583,114 @@ export const getAnimatedCategoryIcon = (slug: string) => {
     case 'smartphones':
       return {
         icon: <SmartphoneIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-indigo-400 group-hover:shadow-[0_10px_30px_rgba(99,102,241,0.25)]',
-        bg: 'bg-indigo-50/70 border border-indigo-100/80 group-hover:bg-indigo-50/90',
-        badgeColor: 'text-indigo-600',
+        glowColor: 'group-hover:border-indigo-400 group-hover:shadow-[0_12px_35px_rgba(99,102,241,0.35)]',
+        bg: 'bg-indigo-950/45 border border-indigo-700/40 group-hover:bg-indigo-900/50',
+        badgeColor: 'text-indigo-400',
       };
     case 'iphones':
       return {
         icon: <IPhoneIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-slate-400 group-hover:shadow-[0_10px_30px_rgba(71,85,105,0.25)]',
-        bg: 'bg-slate-100/80 border border-slate-200/80 group-hover:bg-slate-100',
-        badgeColor: 'text-slate-700',
+        glowColor: 'group-hover:border-violet-400 group-hover:shadow-[0_12px_35px_rgba(139,92,246,0.35)]',
+        bg: 'bg-violet-950/45 border border-violet-700/40 group-hover:bg-violet-900/50',
+        badgeColor: 'text-violet-300',
       };
     case 'android-phones':
       return {
         icon: <AndroidIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-emerald-400 group-hover:shadow-[0_10px_30px_rgba(16,185,129,0.25)]',
-        bg: 'bg-emerald-50/70 border border-emerald-100/80 group-hover:bg-emerald-50/90',
-        badgeColor: 'text-emerald-600',
+        glowColor: 'group-hover:border-emerald-400 group-hover:shadow-[0_12px_35px_rgba(16,185,129,0.35)]',
+        bg: 'bg-emerald-950/45 border border-emerald-700/40 group-hover:bg-emerald-900/50',
+        badgeColor: 'text-emerald-400',
       };
     case 'tablets':
       return {
         icon: <TabletIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-cyan-400 group-hover:shadow-[0_10px_30px_rgba(6,182,212,0.25)]',
-        bg: 'bg-cyan-50/70 border border-cyan-100/80 group-hover:bg-cyan-50/90',
-        badgeColor: 'text-cyan-600',
+        glowColor: 'group-hover:border-cyan-400 group-hover:shadow-[0_12px_35px_rgba(6,182,212,0.35)]',
+        bg: 'bg-cyan-950/45 border border-cyan-700/40 group-hover:bg-cyan-900/50',
+        badgeColor: 'text-cyan-400',
       };
     case 'laptops':
       return {
         icon: <LaptopIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-blue-400 group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.25)]',
-        bg: 'bg-blue-50/70 border border-blue-100/80 group-hover:bg-blue-50/90',
-        badgeColor: 'text-blue-600',
+        glowColor: 'group-hover:border-blue-400 group-hover:shadow-[0_12px_35px_rgba(59,130,246,0.35)]',
+        bg: 'bg-blue-950/45 border border-blue-700/40 group-hover:bg-blue-900/50',
+        badgeColor: 'text-blue-400',
       };
     case 'smartwatches':
       return {
         icon: <SmartwatchIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-purple-400 group-hover:shadow-[0_10px_30px_rgba(168,85,247,0.25)]',
-        bg: 'bg-purple-50/70 border border-purple-100/80 group-hover:bg-purple-50/90',
-        badgeColor: 'text-purple-600',
+        glowColor: 'group-hover:border-purple-400 group-hover:shadow-[0_12px_35px_rgba(168,85,247,0.35)]',
+        bg: 'bg-purple-950/45 border border-purple-700/40 group-hover:bg-purple-900/50',
+        badgeColor: 'text-purple-400',
       };
     case 'earphones':
       return {
         icon: <EarphoneIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-rose-400 group-hover:shadow-[0_10px_30px_rgba(244,63,94,0.25)]',
-        bg: 'bg-rose-50/70 border border-rose-100/80 group-hover:bg-rose-50/90',
-        badgeColor: 'text-rose-600',
+        glowColor: 'group-hover:border-rose-400 group-hover:shadow-[0_12px_35px_rgba(244,63,94,0.35)]',
+        bg: 'bg-rose-950/45 border border-rose-700/40 group-hover:bg-rose-900/50',
+        badgeColor: 'text-rose-400',
       };
     case 'headphones':
       return {
         icon: <HeadphoneIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-rose-400 group-hover:shadow-[0_10px_30px_rgba(244,63,94,0.25)]',
-        bg: 'bg-rose-50/70 border border-rose-100/80 group-hover:bg-rose-50/90',
-        badgeColor: 'text-rose-600',
+        glowColor: 'group-hover:border-rose-400 group-hover:shadow-[0_12px_35px_rgba(244,63,94,0.35)]',
+        bg: 'bg-rose-950/45 border border-rose-700/40 group-hover:bg-rose-900/50',
+        badgeColor: 'text-rose-400',
       };
     case 'chargers':
       return {
         icon: <ChargerIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-amber-400 group-hover:shadow-[0_10px_30px_rgba(245,158,11,0.25)]',
-        bg: 'bg-amber-50/70 border border-amber-100/80 group-hover:bg-amber-50/90',
-        badgeColor: 'text-amber-600',
+        glowColor: 'group-hover:border-amber-400 group-hover:shadow-[0_12px_35px_rgba(245,158,11,0.35)]',
+        bg: 'bg-amber-950/45 border border-amber-700/40 group-hover:bg-amber-900/50',
+        badgeColor: 'text-amber-400',
       };
     case 'power-banks':
       return {
         icon: <PowerBankIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-emerald-400 group-hover:shadow-[0_10px_30px_rgba(16,185,129,0.25)]',
-        bg: 'bg-emerald-50/70 border border-emerald-100/80 group-hover:bg-emerald-50/90',
-        badgeColor: 'text-emerald-600',
+        glowColor: 'group-hover:border-emerald-400 group-hover:shadow-[0_12px_35px_rgba(16,185,129,0.35)]',
+        bg: 'bg-emerald-950/45 border border-emerald-700/40 group-hover:bg-emerald-900/50',
+        badgeColor: 'text-emerald-400',
       };
     case 'cables':
       return {
         icon: <CableIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-amber-400 group-hover:shadow-[0_10px_30px_rgba(245,158,11,0.25)]',
-        bg: 'bg-amber-50/70 border border-amber-100/80 group-hover:bg-amber-50/90',
-        badgeColor: 'text-amber-600',
+        glowColor: 'group-hover:border-amber-400 group-hover:shadow-[0_12px_35px_rgba(245,158,11,0.35)]',
+        bg: 'bg-amber-950/45 border border-amber-700/40 group-hover:bg-amber-900/50',
+        badgeColor: 'text-amber-400',
       };
     case 'mobile-covers':
       return {
         icon: <MobileCoverIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-teal-400 group-hover:shadow-[0_10px_30px_rgba(20,184,166,0.25)]',
-        bg: 'bg-teal-50/70 border border-teal-100/80 group-hover:bg-teal-50/90',
-        badgeColor: 'text-teal-600',
+        glowColor: 'group-hover:border-teal-400 group-hover:shadow-[0_12px_35px_rgba(20,184,166,0.35)]',
+        bg: 'bg-teal-950/45 border border-teal-700/40 group-hover:bg-teal-900/50',
+        badgeColor: 'text-teal-400',
       };
     case 'screen-protectors':
       return {
         icon: <ScreenProtectorIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-sky-400 group-hover:shadow-[0_10px_30px_rgba(14,165,233,0.25)]',
-        bg: 'bg-sky-50/70 border border-sky-100/80 group-hover:bg-sky-50/90',
-        badgeColor: 'text-sky-600',
+        glowColor: 'group-hover:border-sky-400 group-hover:shadow-[0_12px_35px_rgba(14,165,233,0.35)]',
+        bg: 'bg-sky-950/45 border border-sky-700/40 group-hover:bg-sky-900/50',
+        badgeColor: 'text-sky-400',
       };
     case 'speakers':
       return {
         icon: <SpeakerIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-violet-400 group-hover:shadow-[0_10px_30px_rgba(139,92,246,0.25)]',
-        bg: 'bg-violet-50/70 border border-violet-100/80 group-hover:bg-violet-50/90',
-        badgeColor: 'text-violet-600',
+        glowColor: 'group-hover:border-violet-400 group-hover:shadow-[0_12px_35px_rgba(139,92,246,0.35)]',
+        bg: 'bg-violet-950/45 border border-violet-700/40 group-hover:bg-violet-900/50',
+        badgeColor: 'text-violet-400',
       };
     case 'electronics':
       return {
         icon: <ElectronicsIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-indigo-400 group-hover:shadow-[0_10px_30px_rgba(99,102,241,0.25)]',
-        bg: 'bg-indigo-50/70 border border-indigo-100/80 group-hover:bg-indigo-50/90',
-        badgeColor: 'text-indigo-600',
+        glowColor: 'group-hover:border-indigo-400 group-hover:shadow-[0_12px_35px_rgba(99,102,241,0.35)]',
+        bg: 'bg-indigo-950/45 border border-indigo-700/40 group-hover:bg-indigo-900/50',
+        badgeColor: 'text-indigo-400',
       };
     default:
       return {
         icon: <DefaultTechIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-slate-400 group-hover:shadow-[0_10px_30px_rgba(100,116,139,0.25)]',
-        bg: 'bg-slate-50/70 border border-slate-100/80 group-hover:bg-slate-50/90',
-        badgeColor: 'text-slate-600',
+        glowColor: 'group-hover:border-slate-400 group-hover:shadow-[0_12px_35px_rgba(100,116,139,0.35)]',
+        bg: 'bg-slate-900/50 border border-slate-700/40 group-hover:bg-slate-800/50',
+        badgeColor: 'text-slate-300',
       };
   }
 };

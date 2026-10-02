@@ -16,85 +16,89 @@ export const Background3D: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-      {/* 1. Perspective 3D Grid Wave Horizon (Top Transition) */}
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[#0B0819]" aria-hidden="true">
+      {/* 1. Perspective 3D Cyber Horizon Wave Grid (Deep Violet/Cyan) */}
       <div
-        className="absolute -top-32 left-1/2 -translate-x-1/2 w-[160%] h-96 grid-horizon-3d opacity-60"
+        className="absolute -top-32 left-1/2 -translate-x-1/2 w-[170%] h-[480px] grid-horizon-3d opacity-45 pointer-events-none"
         style={{
-          transform: `perspective(600px) rotateX(65deg) translateY(${mousePos.y * 12}px) translateX(${mousePos.x * 12}px)`,
+          transform: `perspective(600px) rotateX(65deg) translateY(${mousePos.y * 14}px) translateX(${mousePos.x * 14}px)`,
         }}
       />
 
-      {/* 2. Floating 3D Glowing Neon Orbs with Mouse Parallax */}
-      {/* Orb 1: Aurora Indigo (Top-Left) */}
+      {/* 2. Mystical Aurora Borealis Glowing Waves & Orbs with Mouse Parallax */}
+      {/* Aurora Orb 1: Electric Violet & Indigo Nebula (Top-Left) */}
       <div
-        className="absolute -top-20 -left-20 w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-indigo-500/18 via-blue-500/12 to-transparent blur-[110px] animate-float-slow-3d transition-transform duration-700 ease-out"
+        className="absolute -top-24 -left-20 w-[620px] h-[620px] rounded-full bg-gradient-to-tr from-violet-600/35 via-purple-700/25 to-indigo-900/10 blur-[130px] animate-float-slow-3d transition-transform duration-700 ease-out"
         style={{
-          transform: `translate(${mousePos.x * 25}px, ${mousePos.y * 25}px)`,
+          transform: `translate(${mousePos.x * 28}px, ${mousePos.y * 28}px)`,
         }}
       />
 
-      {/* Orb 2: Electric Cyan (Top-Right) */}
+      {/* Aurora Orb 2: Ethereal Cyan & Emerald Borealis (Top-Right) */}
       <div
-        className="absolute top-10 -right-24 w-[520px] h-[520px] rounded-full bg-gradient-to-bl from-cyan-400/18 via-teal-400/10 to-transparent blur-[120px] animate-float-reverse-3d transition-transform duration-700 ease-out"
+        className="absolute top-12 -right-28 w-[580px] h-[580px] rounded-full bg-gradient-to-bl from-cyan-400/28 via-teal-500/20 to-transparent blur-[130px] animate-float-reverse-3d transition-transform duration-700 ease-out"
         style={{
-          transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -30}px)`,
+          transform: `translate(${mousePos.x * -32}px, ${mousePos.y * -32}px)`,
         }}
       />
 
-      {/* Orb 3: Violet / Magenta Shimmer (Mid-Page) */}
+      {/* Aurora Orb 3: Cosmic Fuchsia & Magenta Shimmer (Mid-Page Center-Left) */}
       <div
-        className="absolute top-[45%] -left-32 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-purple-500/12 via-indigo-600/10 to-transparent blur-[130px] animate-float-slow-3d transition-transform duration-1000 ease-out"
+        className="absolute top-[42%] -left-36 w-[640px] h-[640px] rounded-full bg-gradient-to-br from-fuchsia-600/22 via-purple-800/18 to-transparent blur-[140px] animate-float-slow-3d transition-transform duration-1000 ease-out"
         style={{
-          transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
+          transform: `translate(${mousePos.x * 22}px, ${mousePos.y * 22}px)`,
         }}
       />
 
-      {/* Orb 4: Warm Gold / Amber Glow (Lower-Right) */}
+      {/* Aurora Orb 4: Deep Royal Sapphire & Amber Velvet (Lower-Right) */}
       <div
-        className="absolute top-[70%] -right-28 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-amber-400/10 via-rose-500/8 to-transparent blur-[120px] animate-float-reverse-3d transition-transform duration-700 ease-out"
+        className="absolute top-[68%] -right-32 w-[550px] h-[550px] rounded-full bg-gradient-to-tl from-indigo-500/22 via-violet-600/15 to-transparent blur-[130px] animate-float-reverse-3d transition-transform duration-700 ease-out"
         style={{
-          transform: `translate(${mousePos.x * -22}px, ${mousePos.y * -22}px)`,
+          transform: `translate(${mousePos.x * -25}px, ${mousePos.y * -25}px)`,
         }}
       />
+
+      {/* Aurora Light Ribbon Stream across screen */}
+      <div className="absolute top-[18%] -left-40 -right-40 h-44 bg-gradient-to-r from-violet-600/0 via-fuchsia-500/12 to-cyan-400/0 blur-[90px] rotate-[-7deg] pointer-events-none" />
+      <div className="absolute top-[58%] -left-40 -right-40 h-48 bg-gradient-to-r from-cyan-500/0 via-violet-600/10 to-pink-500/0 blur-[100px] rotate-[5deg] pointer-events-none" />
 
       {/* 3. Floating 3D Geometric Tech Cubes */}
-      {/* Cube 1: Top Right Floating 3D Wireframe Cube */}
+      {/* Cube 1: Top Right Floating 3D Luminous Wireframe Cube */}
       <div
         className="hidden lg:block absolute top-28 right-[8%] w-16 h-16 perspective-600 transition-transform duration-500 ease-out"
         style={{
-          transform: `translate(${mousePos.x * -18}px, ${mousePos.y * -18}px)`,
+          transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
         }}
       >
         <div className="w-full h-full preserve-3d animate-rotate-cube-3d relative">
-          <div className="absolute inset-0 border border-indigo-400/30 bg-indigo-500/5 backdrop-blur-[2px] rounded-lg shadow-sm" style={{ transform: 'translateZ(32px)' }} />
-          <div className="absolute inset-0 border border-indigo-400/30 bg-indigo-500/5 backdrop-blur-[2px] rounded-lg" style={{ transform: 'rotateY(180deg) translateZ(32px)' }} />
-          <div className="absolute inset-0 border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-[2px] rounded-lg" style={{ transform: 'rotateY(-90deg) translateZ(32px)' }} />
-          <div className="absolute inset-0 border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-[2px] rounded-lg" style={{ transform: 'rotateY(90deg) translateZ(32px)' }} />
-          <div className="absolute inset-0 border border-purple-400/30 bg-purple-500/5 backdrop-blur-[2px] rounded-lg" style={{ transform: 'rotateX(90deg) translateZ(32px)' }} />
-          <div className="absolute inset-0 border border-purple-400/30 bg-purple-500/5 backdrop-blur-[2px] rounded-lg" style={{ transform: 'rotateX(-90deg) translateZ(32px)' }} />
+          <div className="absolute inset-0 border border-violet-400/40 bg-violet-600/10 backdrop-blur-[3px] rounded-lg shadow-[0_0_15px_rgba(139,92,246,0.3)]" style={{ transform: 'translateZ(32px)' }} />
+          <div className="absolute inset-0 border border-violet-400/40 bg-violet-600/10 backdrop-blur-[3px] rounded-lg" style={{ transform: 'rotateY(180deg) translateZ(32px)' }} />
+          <div className="absolute inset-0 border border-cyan-400/40 bg-cyan-600/10 backdrop-blur-[3px] rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)]" style={{ transform: 'rotateY(-90deg) translateZ(32px)' }} />
+          <div className="absolute inset-0 border border-cyan-400/40 bg-cyan-600/10 backdrop-blur-[3px] rounded-lg" style={{ transform: 'rotateY(90deg) translateZ(32px)' }} />
+          <div className="absolute inset-0 border border-fuchsia-400/40 bg-fuchsia-600/10 backdrop-blur-[3px] rounded-lg shadow-[0_0_15px_rgba(217,70,239,0.3)]" style={{ transform: 'rotateX(90deg) translateZ(32px)' }} />
+          <div className="absolute inset-0 border border-fuchsia-400/40 bg-fuchsia-600/10 backdrop-blur-[3px] rounded-lg" style={{ transform: 'rotateX(-90deg) translateZ(32px)' }} />
         </div>
       </div>
 
       {/* Cube 2: Mid-Left Floating 3D Tech Cube */}
       <div
-        className="hidden xl:block absolute top-[52%] left-[4%] w-12 h-12 perspective-600 transition-transform duration-500 ease-out opacity-75"
+        className="hidden xl:block absolute top-[52%] left-[4%] w-12 h-12 perspective-600 transition-transform duration-500 ease-out opacity-85"
         style={{
-          transform: `translate(${mousePos.x * 22}px, ${mousePos.y * 22}px)`,
+          transform: `translate(${mousePos.x * 24}px, ${mousePos.y * 24}px)`,
         }}
       >
         <div className="w-full h-full preserve-3d animate-rotate-cube-3d relative" style={{ animationDuration: '28s', animationDirection: 'reverse' }}>
-          <div className="absolute inset-0 border border-cyan-400/35 bg-cyan-500/5 rounded-md" style={{ transform: 'translateZ(24px)' }} />
-          <div className="absolute inset-0 border border-cyan-400/35 bg-cyan-500/5 rounded-md" style={{ transform: 'rotateY(180deg) translateZ(24px)' }} />
-          <div className="absolute inset-0 border border-indigo-400/35 bg-indigo-500/5 rounded-md" style={{ transform: 'rotateY(-90deg) translateZ(24px)' }} />
-          <div className="absolute inset-0 border border-indigo-400/35 bg-indigo-500/5 rounded-md" style={{ transform: 'rotateY(90deg) translateZ(24px)' }} />
-          <div className="absolute inset-0 border border-emerald-400/35 bg-emerald-500/5 rounded-md" style={{ transform: 'rotateX(90deg) translateZ(24px)' }} />
-          <div className="absolute inset-0 border border-emerald-400/35 bg-emerald-500/5 rounded-md" style={{ transform: 'rotateX(-90deg) translateZ(24px)' }} />
+          <div className="absolute inset-0 border border-cyan-400/45 bg-cyan-500/10 rounded-md shadow-[0_0_12px_rgba(6,182,212,0.3)]" style={{ transform: 'translateZ(24px)' }} />
+          <div className="absolute inset-0 border border-cyan-400/45 bg-cyan-500/10 rounded-md" style={{ transform: 'rotateY(180deg) translateZ(24px)' }} />
+          <div className="absolute inset-0 border border-violet-400/45 bg-violet-500/10 rounded-md shadow-[0_0_12px_rgba(139,92,246,0.3)]" style={{ transform: 'rotateY(-90deg) translateZ(24px)' }} />
+          <div className="absolute inset-0 border border-violet-400/45 bg-violet-500/10 rounded-md" style={{ transform: 'rotateY(90deg) translateZ(24px)' }} />
+          <div className="absolute inset-0 border border-emerald-400/45 bg-emerald-500/10 rounded-md" style={{ transform: 'rotateX(90deg) translateZ(24px)' }} />
+          <div className="absolute inset-0 border border-emerald-400/45 bg-emerald-500/10 rounded-md" style={{ transform: 'rotateX(-90deg) translateZ(24px)' }} />
         </div>
       </div>
 
-      {/* 4. Subtle Particle Nodes with Shimmer */}
-      <div className="absolute inset-0 bg-[radial-gradient(#4f46e5_0.7px,transparent_0.7px)] [background-size:32px_32px] opacity-[0.14]" />
+      {/* 4. Starlight Particle Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#8b5cf6_0.8px,transparent_0.8px)] [background-size:36px_36px] opacity-[0.16]" />
     </div>
   );
 };

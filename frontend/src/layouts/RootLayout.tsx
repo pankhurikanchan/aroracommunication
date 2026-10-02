@@ -7,7 +7,7 @@ import { Background3D } from '../components/common/Background3D';
 
 export const RootLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50/90 text-slate-900 relative selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#0B0819] text-slate-100 relative selection:bg-violet-600 selection:text-white">
       <Background3D />
       <div className="relative z-10 flex flex-col min-h-screen">
         <Header />

@@ -29,7 +29,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
           <Link
             key={idx}
             to={pill.slug.startsWith('../') ? pill.slug.replace('../', '/') : `/category/${pill.slug}`}
-            className="group shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white border border-slate-200 hover:border-indigo-500 hover:shadow-md transition-all duration-200 text-xs font-bold text-slate-700 hover:text-indigo-600"
+            className="group shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#130E29]/80 border border-violet-800/40 hover:border-violet-400 hover:shadow-lg hover:shadow-violet-600/20 transition-all duration-200 text-xs font-bold text-slate-200 hover:text-white"
           >
             <span className="text-base group-hover:scale-125 group-hover:rotate-6 transition-transform duration-200">
               {pill.emoji}
@@ -42,20 +42,20 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
       {/* 2. Category Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-indigo-600 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+          <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-violet-400 mb-1">
+            <Sparkles className="w-3.5 h-3.5 text-violet-400" />
             <span>Curated Collections</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Explore by Tech Category
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
             Discover verified flagship smartphones, smart electronics, and original accessories
           </p>
         </div>
         <Link
           to="/products"
-          className="text-xs sm:text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 hover:underline group shrink-0"
+          className="text-xs sm:text-sm font-bold text-violet-400 hover:text-violet-200 flex items-center gap-1 hover:underline group shrink-0"
         >
           <span>All Categories</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -70,13 +70,13 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
             <Link
               key={cat.id}
               to={`/category/${cat.slug}`}
-              className={`group relative bg-white/95 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center card-3d-wrapper preserve-3d ${details.glowColor} overflow-hidden`}
+              className={`group relative bg-[#130F2B]/85 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-violet-900/35 hover:border-violet-500/60 hover:shadow-[0_15px_40px_rgba(139,92,246,0.3)] transition-all duration-500 flex flex-col items-center text-center card-3d-wrapper preserve-3d ${details.glowColor} overflow-hidden`}
             >
               {/* 3D Light Sheen Overlay */}
               <div className="shine-overlay rounded-2xl" />
 
               {/* Card top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/0 to-transparent group-hover:via-indigo-500 transition-all duration-500" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-violet-500/0 to-transparent group-hover:via-violet-400 transition-all duration-500" />
 
               {/* Animated Category Icon Container */}
               <div
@@ -86,12 +86,12 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ categories }) => {
                 {details.icon}
               </div>
 
-              <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 group-hover:text-indigo-600 transition-colors line-clamp-1 flex items-center justify-center gap-1">
+              <h3 className="text-xs sm:text-sm font-extrabold text-slate-100 group-hover:text-violet-300 transition-colors line-clamp-1 flex items-center justify-center gap-1">
                 <span>{cat.name}</span>
-                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-indigo-600" />
+                <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-violet-400" />
               </h3>
 
-              <span className="text-[11px] text-slate-400 font-medium mt-1">
+              <span className="text-[11px] text-violet-300/60 font-medium mt-1">
                 {cat._count?.products ? `${cat._count.products} products` : 'Browse Store'}
               </span>
             </Link>

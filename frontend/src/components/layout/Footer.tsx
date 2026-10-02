@@ -14,12 +14,12 @@ import {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800">
+    <footer className="bg-[#070412] text-slate-300 pt-12 pb-8 border-t border-violet-950/70">
       {/* Trust Badges Bar */}
-      <div className="max-w-7xl mx-auto px-4 pb-10 border-b border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 pb-10 border-b border-violet-950/70">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-cyan-400 shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-violet-400 shrink-0">
               <Truck className="w-6 h-6" />
             </div>
             <div>
@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-emerald-400 shrink-0">
               <RotateCcw className="w-6 h-6" />
             </div>
             <div>
@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 flex items-center justify-center text-amber-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-amber-400 shrink-0">
               <CreditCard className="w-6 h-6" />
             </div>
             <div>
@@ -66,13 +66,13 @@ export const Footer: React.FC = () => {
           {/* Brand Info & Address */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 p-0.5 flex items-center justify-center shadow-md">
-                <div className="w-full h-full bg-slate-900 rounded-[6px] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-violet-600 p-0.5 flex items-center justify-center shadow-md">
+                <div className="w-full h-full bg-slate-950 rounded-[6px] flex items-center justify-center">
                   <span className="text-white font-black text-sm">AM</span>
                 </div>
               </div>
               <span className="text-xl font-extrabold text-white tracking-tight">
-                ARORA <span className="text-indigo-400 font-light">MOBILE HUB</span>
+                ARORA <span className="font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-300 bg-clip-text text-transparent">MOBILE HUB</span>
               </span>
             </div>
 

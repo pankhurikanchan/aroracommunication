@@ -60,12 +60,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="group relative bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-slate-200/90 hover:border-indigo-400 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between overflow-hidden card-3d-wrapper perspective-1000">
+    <div className="group relative bg-[#130F2B]/85 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-violet-900/35 hover:border-violet-500/60 shadow-lg hover:shadow-[0_15px_40px_rgba(139,92,246,0.25)] transition-all duration-500 flex flex-col justify-between overflow-hidden card-3d-wrapper perspective-1000">
       {/* 3D Specular Light Glare Overlay */}
       <div className="shine-overlay rounded-2xl sm:rounded-3xl z-20 pointer-events-none" />
 
       {/* Ambient Glow Aura on Hover */}
-      <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-indigo-500/20 via-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none -z-10" />
+      <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-violet-500/20 via-cyan-500/20 to-fuchsia-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none -z-10" />
 
       {/* Top Floating Badges & Wishlist Button with 3D Elevation */}
       <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-10 pointer-events-none" style={{ transform: 'translateZ(20px)' }}>
@@ -81,7 +81,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </span>
           )}
           {product.isNewArrival && !product.isBestSeller && (
-            <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-extrabold text-[9px] sm:text-[10px] shadow-sm uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-extrabold text-[9px] sm:text-[10px] shadow-sm uppercase tracking-wider">
               NEW
             </span>
           )}
@@ -92,8 +92,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           onClick={handleWishlistToggle}
           className={`pointer-events-auto w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-sm ${
             inWishlist
-              ? 'bg-rose-50 text-rose-600 border border-rose-200 scale-105'
-              : 'bg-white/90 text-slate-400 hover:text-rose-500 hover:bg-white border border-slate-200 hover:scale-110'
+              ? 'bg-rose-950/70 text-rose-400 border border-rose-600/50 scale-105'
+              : 'bg-[#181238]/80 text-slate-400 hover:text-rose-400 hover:bg-[#231A4D] border border-violet-800/40 hover:scale-110'
           }`}
           title={inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
           aria-label="Wishlist"
@@ -103,7 +103,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       {/* Product Image Area with 3D Elevation & Quick View */}
-      <div className="relative pt-[84%] overflow-hidden bg-slate-50/80 border-b border-slate-100">
+      <div className="relative pt-[84%] overflow-hidden bg-[#161135]/60 border-b border-violet-900/25">
         <Link to={`/products/${product.slug}`} className="block absolute inset-0">
           <img
             src={primaryImage}
@@ -114,7 +114,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Link>
 
         {product.stockQuantity <= 0 && (
-          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center pointer-events-none">
             <span className="bg-red-600 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow">
               Out of Stock
             </span>
@@ -125,7 +125,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="absolute bottom-2.5 inset-x-3 hidden sm:flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-2 group-hover:translate-y-0">
           <button
             onClick={handleQuickView}
-            className="w-full py-2 px-3 rounded-xl bg-white/95 hover:bg-white text-slate-800 font-extrabold text-xs shadow-md border border-slate-200 flex items-center justify-center gap-1.5 backdrop-blur-sm hover:text-indigo-600 transition"
+            className="w-full py-2 px-3 rounded-xl bg-[#1A143D]/90 hover:bg-[#241C52] text-slate-100 font-extrabold text-xs shadow-md border border-violet-700/40 flex items-center justify-center gap-1.5 backdrop-blur-sm hover:text-violet-300 transition"
           >
             <Eye className="w-3.5 h-3.5" />
             <span>Quick View</span>
@@ -137,14 +137,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="p-4 flex-1 flex flex-col justify-between">
         <div>
           {/* Brand */}
-          <div className="text-[10px] font-extrabold uppercase tracking-widest text-indigo-600 mb-1">
+          <div className="text-[10px] font-extrabold uppercase tracking-widest text-violet-400 mb-1">
             {product.brand?.name || 'GENUINE ACCESSORY'}
           </div>
 
           {/* Title */}
           <Link
             to={`/products/${product.slug}`}
-            className="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-indigo-600 line-clamp-2 transition leading-snug mb-1.5"
+            className="text-xs sm:text-sm font-extrabold text-slate-100 hover:text-violet-300 line-clamp-2 transition leading-snug mb-1.5"
             title={product.name}
           >
             {product.name}
@@ -152,10 +152,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           {/* Star Rating & Reviews */}
           <div className="flex items-center gap-1.5 mb-2.5">
-            <div className="flex items-center text-amber-500 text-xs font-bold">
+            <div className="flex items-center text-amber-400 text-xs font-bold">
               {'★'.repeat(5)}
             </div>
-            <span className="text-xs font-bold text-slate-800">
+            <span className="text-xs font-bold text-slate-200">
               {product.rating > 0 ? product.rating.toFixed(1) : '4.8'}
             </span>
             <span className="text-[11px] text-slate-400">
@@ -166,19 +166,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Price & Action Buttons */}
         <div>
-          <div className="mb-3 pt-2 border-t border-slate-100">
+          <div className="mb-3 pt-2 border-t border-violet-950/60">
             <div className="flex items-baseline gap-2 flex-wrap">
-              <span className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+              <span className="text-base sm:text-lg font-black text-white tracking-tight">
                 {formatINR(currentPrice)}
               </span>
               {hasDiscount && (
-                <span className="text-xs text-slate-400 line-through font-normal">
+                <span className="text-xs text-slate-500 line-through font-normal">
                   {formatINR(product.price)}
                 </span>
               )}
             </div>
             {hasDiscount && savings > 0 && (
-              <span className="text-[10px] font-bold text-emerald-600 block mt-0.5">
+              <span className="text-[10px] font-bold text-emerald-400 block mt-0.5">
                 Save {formatINR(savings)}
               </span>
             )}
@@ -191,7 +191,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className={`w-full py-2.5 px-3 rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 transition-all duration-200 shadow-sm ${
               justAdded
                 ? 'bg-emerald-600 text-white shadow-emerald-600/30'
-                : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-600/20 active:scale-95'
+                : 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-600/30 active:scale-95'
             } disabled:opacity-50`}
           >
             {justAdded ? (

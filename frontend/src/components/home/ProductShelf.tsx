@@ -22,25 +22,25 @@ export const ProductShelf: React.FC<ProductShelfProps> = ({
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-2 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-2 border-b border-violet-900/35">
         <div>
           {badge && (
-            <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-indigo-100 text-indigo-800 mb-1">
+            <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-violet-950/70 text-violet-300 border border-violet-800/40 mb-1">
               {badge}
             </span>
           )}
-          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">{subtitle}</p>
+            <p className="text-xs sm:text-sm text-slate-300 mt-0.5">{subtitle}</p>
           )}
         </div>
 
         {viewAllLink && (
           <Link
             to={viewAllLink}
-            className="mt-2 sm:mt-0 text-xs sm:text-sm font-bold text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1 shrink-0"
+            className="mt-2 sm:mt-0 text-xs sm:text-sm font-bold text-violet-400 hover:text-violet-200 hover:underline flex items-center gap-1 shrink-0"
           >
             <span>View All</span>
             <span>&rarr;</span>

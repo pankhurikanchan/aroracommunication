@@ -156,17 +156,17 @@ export const BrandShowcase: React.FC = () => {
       {/* Brand Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-500/20 animate-neon-pulse">
+          <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-violet-500/20 animate-neon-pulse">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-black text-white tracking-tight flex items-center gap-2">
               <span>Official Brand Partners</span>
-              <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs">
-                <Sparkles className="w-3 h-3 text-emerald-600" /> 100% Genuine Warranty
+              <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-emerald-950/60 text-emerald-400 border border-emerald-500/40 shadow-xs">
+                <Sparkles className="w-3 h-3 text-emerald-400" /> 100% Genuine Warranty
               </span>
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-400 mt-0.5">
               Authorized brand-sourced inventory with official GST invoice and pan-India warranty
             </p>
           </div>
@@ -174,10 +174,10 @@ export const BrandShowcase: React.FC = () => {
 
         <Link
           to="/products"
-          className="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5 group self-start sm:self-auto bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-slate-200/90 shadow-xs hover:shadow-md transition-all"
+          className="text-xs font-bold text-violet-300 hover:text-white flex items-center gap-1.5 group self-start sm:self-auto bg-[#130E29]/80 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-violet-800/40 shadow-xs hover:border-violet-500 hover:shadow-md transition-all"
         >
           <span>Explore All Brands</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-violet-400" />
         </Link>
       </div>
 
@@ -187,20 +187,20 @@ export const BrandShowcase: React.FC = () => {
           <Link
             key={brand.slug}
             to={`/products?brand=${encodeURIComponent(brand.name)}`}
-            className={`group relative bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between overflow-hidden preserve-3d hover:-translate-y-2 hover:scale-[1.03] ${brand.accentBorder}`}
+            className={`group relative bg-[#130F2B]/85 backdrop-blur-md rounded-2xl p-4 border border-violet-900/35 shadow-lg hover:shadow-[0_15px_40px_rgba(139,92,246,0.3)] transition-all duration-500 flex flex-col justify-between overflow-hidden preserve-3d hover:-translate-y-2 hover:scale-[1.03] ${brand.accentBorder}`}
           >
             {/* 3D Ambient Neon Glow Behind Logo */}
             <div
-              className={`absolute -top-10 -right-10 w-28 h-28 rounded-full bg-gradient-to-br ${brand.bgGlow} opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl pointer-events-none`}
+              className={`absolute -top-10 -right-10 w-28 h-28 rounded-full bg-gradient-to-br ${brand.bgGlow} opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-2xl pointer-events-none`}
             />
 
             {/* Holographic Shimmer Sweep on Hover */}
-            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full duration-1000 bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform pointer-events-none z-20" />
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform pointer-events-none z-20" />
 
             {/* Top row: Animated Brand Logo Badge */}
             <div className="flex items-center justify-between mb-4">
               <div
-                className={`w-12 h-12 rounded-2xl ${brand.containerBg} flex items-center justify-center shadow-md p-2 group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-[-4deg] transition-all duration-300 relative overflow-hidden`}
+                className={`w-12 h-12 rounded-2xl ${brand.containerBg} flex items-center justify-center shadow-md p-2 group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-[-4deg] transition-all duration-300 relative overflow-hidden border border-white/10`}
               >
                 {/* Subtle radial sheen on the badge */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -210,16 +210,16 @@ export const BrandShowcase: React.FC = () => {
               </div>
 
               <div className="flex flex-col items-end">
-                <span className="text-[10px] font-black text-indigo-600/70 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all">
+                <span className="text-[10px] font-black text-violet-400 group-hover:text-violet-200 group-hover:translate-x-0.5 transition-all">
                   &rarr;
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
               </div>
             </div>
 
             {/* Bottom info */}
             <div className="space-y-1">
-              <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight flex items-center justify-between">
+              <h3 className="font-extrabold text-sm text-slate-100 group-hover:text-violet-300 transition-colors tracking-tight flex items-center justify-between">
                 <span>{brand.name}</span>
               </h3>
               <div className="flex items-center">

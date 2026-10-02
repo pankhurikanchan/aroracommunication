@@ -55,28 +55,28 @@ export const CustomerReviewsSection: React.FC = () => {
       {/* Header with ratings summary */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-indigo-600 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+          <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-violet-400 mb-1">
+            <Sparkles className="w-3.5 h-3.5 text-violet-400" />
             <span>Real Customer Experiences</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             Loved by 5,000+ Tech Enthusiasts
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Read verified reviews from customers across Noida, Delhi-NCR, and Pan-India
+          <p className="text-xs sm:text-sm text-slate-300 mt-1">
+            Read verified reviews from customers across Bareilly, Uttar Pradesh, and Pan-India
           </p>
         </div>
 
         {/* Aggregate Score Pill */}
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-200/90 shadow-sm self-start md:self-auto">
-          <div className="text-2xl font-black text-slate-900">4.9</div>
+        <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#130F2B]/85 backdrop-blur-md border border-violet-900/35 shadow-sm self-start md:self-auto">
+          <div className="text-2xl font-black text-white">4.9</div>
           <div>
             <div className="flex text-amber-400">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-current" />
               ))}
             </div>
-            <div className="text-[10px] text-slate-500 font-semibold mt-0.5">
+            <div className="text-[10px] text-slate-300 font-semibold mt-0.5">
               Based on 3,840+ verified buyer ratings
             </div>
           </div>
@@ -88,7 +88,7 @@ export const CustomerReviewsSection: React.FC = () => {
         {reviews.map((rev) => (
           <div
             key={rev.id}
-            className="group relative bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+            className="group relative bg-[#130F2B]/85 backdrop-blur-md rounded-3xl p-6 border border-violet-900/35 shadow-sm hover:shadow-[0_15px_35px_rgba(139,92,246,0.25)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
           >
             <div>
               {/* Star Rating & Verified Pill */}
@@ -98,23 +98,23 @@ export const CustomerReviewsSection: React.FC = () => {
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full">
-                  <CheckCircle className="w-3 h-3 text-emerald-600" />
+                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-400 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-0.5 rounded-full">
+                  <CheckCircle className="w-3 h-3 text-emerald-400" />
                   Verified Purchase
                 </span>
               </div>
 
               {/* Title & Comment */}
-              <h4 className="text-sm font-extrabold text-slate-900 mb-2 leading-snug">
+              <h4 className="text-sm font-extrabold text-white mb-2 leading-snug">
                 "{rev.title}"
               </h4>
 
-              <p className="text-xs text-slate-600 leading-relaxed italic mb-4 font-normal">
+              <p className="text-xs text-slate-300 leading-relaxed italic mb-4 font-normal">
                 "{rev.comment}"
               </p>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div className="pt-4 border-t border-violet-900/30 flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <div
                   className={`w-9 h-9 rounded-full bg-gradient-to-tr ${rev.avatarBg} text-white font-extrabold text-xs flex items-center justify-center shadow-md`}
@@ -122,15 +122,15 @@ export const CustomerReviewsSection: React.FC = () => {
                   {rev.avatar}
                 </div>
                 <div>
-                  <p className="text-xs font-extrabold text-slate-800">{rev.name}</p>
+                  <p className="text-xs font-extrabold text-slate-100">{rev.name}</p>
                   <p className="text-[10px] text-slate-400 font-medium">
                     {rev.city} &bull; {rev.date}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1 text-[10px] text-slate-400 font-semibold bg-slate-50 px-2 py-1 rounded-lg">
-                <ThumbsUp className="w-3 h-3 text-indigo-500" />
+              <div className="flex items-center gap-1 text-[10px] text-violet-300 font-semibold bg-violet-950/60 border border-violet-800/40 px-2 py-1 rounded-lg">
+                <ThumbsUp className="w-3 h-3 text-violet-400" />
                 <span>{rev.helpfulCount}</span>
               </div>
             </div>
