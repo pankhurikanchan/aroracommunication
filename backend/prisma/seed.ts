@@ -39,6 +39,17 @@ async function main() {
     },
   });
 
+  const pankhuriPassword = await bcrypt.hash('Pankhuri@Arora2026', 10);
+  const pankhuriAdmin = await prisma.user.create({
+    data: {
+      email: 'pankhuri@aroramobilehub.com',
+      password: pankhuriPassword,
+      name: 'Pankhuri Kanchan',
+      phone: '+91 7300791957',
+      role: 'ADMIN',
+    },
+  });
+
   const customer = await prisma.user.create({
     data: {
       email: 'customer@example.com',
