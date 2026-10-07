@@ -1,4 +1,16 @@
 import React from 'react';
+import {
+  AppleLogo,
+  SamsungLogo,
+  AndroidRobotLogo,
+  BoatLogo,
+  SonyLogo,
+  AnkerLogo,
+  XiaomiLogo,
+  FastTypeCLogo,
+  SpigenLogo,
+  JblLogo,
+} from './BrandLogos';
 
 interface CategoryIconProps {
   className?: string;
@@ -577,117 +589,189 @@ export const DefaultTechIcon: React.FC<CategoryIconProps> = ({ className = 'w-10
   </div>
 );
 
-// Helper function to resolve category slug to corresponding animated icon component
+// Helper function to resolve category slug to corresponding animated OG brand icon component
 export const getAnimatedCategoryIcon = (slug: string) => {
   switch (slug) {
     case 'smartphones':
       return {
-        icon: <SmartphoneIcon className="w-11 h-11" />,
-        glowColor: 'group-hover:border-indigo-400 group-hover:shadow-[0_12px_35px_rgba(99,102,241,0.35)]',
-        bg: 'bg-indigo-950/45 border border-indigo-700/40 group-hover:bg-indigo-900/50',
-        badgeColor: 'text-indigo-400',
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <SamsungLogo className="w-12 h-5 text-cyan-400 drop-shadow-[0_2px_8px_rgba(6,182,212,0.4)]" />
+            <span className="text-[8px] font-black tracking-wider text-cyan-200 uppercase mt-0.5">Galaxy</span>
+          </div>
+        ),
+        glowColor: 'group-hover:border-cyan-400 group-hover:shadow-[0_12px_35px_rgba(6,182,212,0.35)]',
+        bg: 'bg-cyan-950/45 border border-cyan-700/40 group-hover:bg-cyan-900/50',
+        badgeColor: 'text-cyan-400',
       };
     case 'iphones':
       return {
-        icon: <IPhoneIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <AppleLogo className="w-9 h-9 text-slate-100 drop-shadow-[0_2px_10px_rgba(255,255,255,0.45)]" />
+          </div>
+        ),
         glowColor: 'group-hover:border-violet-400 group-hover:shadow-[0_12px_35px_rgba(139,92,246,0.35)]',
         bg: 'bg-violet-950/45 border border-violet-700/40 group-hover:bg-violet-900/50',
         badgeColor: 'text-violet-300',
       };
     case 'android-phones':
       return {
-        icon: <AndroidIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <AndroidRobotLogo className="w-10 h-10 drop-shadow-[0_2px_12px_rgba(61,220,132,0.5)]" />
+          </div>
+        ),
         glowColor: 'group-hover:border-emerald-400 group-hover:shadow-[0_12px_35px_rgba(16,185,129,0.35)]',
         bg: 'bg-emerald-950/45 border border-emerald-700/40 group-hover:bg-emerald-900/50',
         badgeColor: 'text-emerald-400',
       };
     case 'tablets':
       return {
-        icon: <TabletIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <AppleLogo className="w-7 h-7 text-cyan-200 drop-shadow-[0_2px_8px_rgba(6,182,212,0.4)]" />
+            <span className="text-[9px] font-black tracking-widest text-cyan-300 mt-0.5">iPad</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-cyan-400 group-hover:shadow-[0_12px_35px_rgba(6,182,212,0.35)]',
         bg: 'bg-cyan-950/45 border border-cyan-700/40 group-hover:bg-cyan-900/50',
         badgeColor: 'text-cyan-400',
       };
     case 'laptops':
       return {
-        icon: <LaptopIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <AppleLogo className="w-6 h-6 text-blue-200 drop-shadow-[0_2px_8px_rgba(59,130,246,0.4)]" />
+            <span className="text-[8px] font-black tracking-widest text-blue-300 mt-0.5">MacBook</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-blue-400 group-hover:shadow-[0_12px_35px_rgba(59,130,246,0.35)]',
         bg: 'bg-blue-950/45 border border-blue-700/40 group-hover:bg-blue-900/50',
         badgeColor: 'text-blue-400',
       };
     case 'smartwatches':
       return {
-        icon: <SmartwatchIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <AppleLogo className="w-6 h-6 text-purple-200 drop-shadow-[0_2px_8px_rgba(168,85,247,0.4)]" />
+            <span className="text-[8px] font-black tracking-widest text-purple-300 mt-0.5">WATCH</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-purple-400 group-hover:shadow-[0_12px_35px_rgba(168,85,247,0.35)]',
         bg: 'bg-purple-950/45 border border-purple-700/40 group-hover:bg-purple-900/50',
         badgeColor: 'text-purple-400',
       };
     case 'earphones':
       return {
-        icon: <EarphoneIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <BoatLogo className="w-9 h-9 drop-shadow-[0_2px_10px_rgba(225,29,72,0.5)]" />
+            <span className="text-[8px] font-black tracking-wider text-rose-300 mt-0.5 uppercase">boAt</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-rose-400 group-hover:shadow-[0_12px_35px_rgba(244,63,94,0.35)]',
         bg: 'bg-rose-950/45 border border-rose-700/40 group-hover:bg-rose-900/50',
         badgeColor: 'text-rose-400',
       };
     case 'headphones':
       return {
-        icon: <HeadphoneIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <SonyLogo className="w-12 h-4 text-rose-200 drop-shadow-[0_2px_8px_rgba(244,63,94,0.4)]" />
+            <span className="text-[8px] font-bold tracking-wider text-rose-300 mt-0.5">1000XM5</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-rose-400 group-hover:shadow-[0_12px_35px_rgba(244,63,94,0.35)]',
         bg: 'bg-rose-950/45 border border-rose-700/40 group-hover:bg-rose-900/50',
         badgeColor: 'text-rose-400',
       };
     case 'chargers':
       return {
-        icon: <ChargerIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <AnkerLogo className="w-9 h-9 drop-shadow-[0_2px_10px_rgba(6,182,212,0.4)]" />
+            <span className="text-[8px] font-black tracking-wider text-cyan-300 mt-0.5 uppercase">Anker GaN</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-amber-400 group-hover:shadow-[0_12px_35px_rgba(245,158,11,0.35)]',
         bg: 'bg-amber-950/45 border border-amber-700/40 group-hover:bg-amber-900/50',
         badgeColor: 'text-amber-400',
       };
     case 'power-banks':
       return {
-        icon: <PowerBankIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <XiaomiLogo className="w-8 h-8 drop-shadow-[0_2px_10px_rgba(255,105,0,0.5)]" />
+            <span className="text-[8px] font-black tracking-wider text-orange-300 mt-0.5 uppercase">Mi Power</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-emerald-400 group-hover:shadow-[0_12px_35px_rgba(16,185,129,0.35)]',
         bg: 'bg-emerald-950/45 border border-emerald-700/40 group-hover:bg-emerald-900/50',
         badgeColor: 'text-emerald-400',
       };
     case 'cables':
       return {
-        icon: <CableIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <FastTypeCLogo className="w-9 h-9 drop-shadow-[0_2px_10px_rgba(245,158,11,0.5)]" />
+            <span className="text-[8px] font-black tracking-wider text-amber-300 mt-0.5 uppercase">Type-C PD</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-amber-400 group-hover:shadow-[0_12px_35px_rgba(245,158,11,0.35)]',
         bg: 'bg-amber-950/45 border border-amber-700/40 group-hover:bg-amber-900/50',
         badgeColor: 'text-amber-400',
       };
     case 'mobile-covers':
       return {
-        icon: <MobileCoverIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <SpigenLogo className="w-9 h-9 drop-shadow-[0_2px_10px_rgba(245,158,11,0.5)]" />
+            <span className="text-[8px] font-black tracking-wider text-amber-300 mt-0.5 uppercase">Spigen</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-teal-400 group-hover:shadow-[0_12px_35px_rgba(20,184,166,0.35)]',
         bg: 'bg-teal-950/45 border border-teal-700/40 group-hover:bg-teal-900/50',
         badgeColor: 'text-teal-400',
       };
     case 'screen-protectors':
       return {
-        icon: <ScreenProtectorIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <SpigenLogo className="w-9 h-9 drop-shadow-[0_2px_10px_rgba(14,165,233,0.5)]" />
+            <span className="text-[8px] font-black tracking-wider text-sky-300 mt-0.5 uppercase">9H Glass</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-sky-400 group-hover:shadow-[0_12px_35px_rgba(14,165,233,0.35)]',
         bg: 'bg-sky-950/45 border border-sky-700/40 group-hover:bg-sky-900/50',
         badgeColor: 'text-sky-400',
       };
     case 'speakers':
       return {
-        icon: <SpeakerIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <JblLogo className="w-11 h-6 drop-shadow-[0_2px_10px_rgba(255,62,0,0.5)]" />
+          </div>
+        ),
         glowColor: 'group-hover:border-violet-400 group-hover:shadow-[0_12px_35px_rgba(139,92,246,0.35)]',
         bg: 'bg-violet-950/45 border border-violet-700/40 group-hover:bg-violet-900/50',
         badgeColor: 'text-violet-400',
       };
     case 'electronics':
       return {
-        icon: <ElectronicsIcon className="w-11 h-11" />,
+        icon: (
+          <div className="flex flex-col items-center justify-center animate-icon-float">
+            <XiaomiLogo className="w-8 h-8 drop-shadow-[0_2px_10px_rgba(255,105,0,0.5)]" />
+            <span className="text-[8px] font-black tracking-wider text-indigo-300 mt-0.5 uppercase">Smart TV</span>
+          </div>
+        ),
         glowColor: 'group-hover:border-indigo-400 group-hover:shadow-[0_12px_35px_rgba(99,102,241,0.35)]',
         bg: 'bg-indigo-950/45 border border-indigo-700/40 group-hover:bg-indigo-900/50',
         badgeColor: 'text-indigo-400',
       };
     default:
       return {
-        icon: <DefaultTechIcon className="w-11 h-11" />,
+        icon: <AppleLogo className="w-8 h-8 text-slate-200" />,
         glowColor: 'group-hover:border-slate-400 group-hover:shadow-[0_12px_35px_rgba(100,116,139,0.35)]',
         bg: 'bg-slate-900/50 border border-slate-700/40 group-hover:bg-slate-800/50',
         badgeColor: 'text-slate-300',

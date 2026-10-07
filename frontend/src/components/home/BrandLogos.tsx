@@ -195,3 +195,29 @@ export const NothingLogo: React.FC<{ className?: string }> = ({ className = 'w-9
     </text>
   </svg>
 );
+
+export const AndroidRobotLogo: React.FC<{ className?: string }> = ({ className = 'w-8 h-8' }) => (
+  <svg viewBox="0 0 100 100" fill="none" className={className}>
+    {/* Android Antennae */}
+    <line x1="33" y1="28" x2="22" y2="10" stroke="#3DDC84" strokeWidth="6" strokeLinecap="round" />
+    <line x1="67" y1="28" x2="78" y2="10" stroke="#3DDC84" strokeWidth="6" strokeLinecap="round" />
+    {/* Official Bugdroid Head Dome */}
+    <path
+      d="M12 58 C12 30 28 18 50 18 C72 18 88 30 88 58 Z"
+      fill="#3DDC84"
+    />
+    {/* Eyes */}
+    <circle cx="34" cy="40" r="5" fill="#FFFFFF" />
+    <circle cx="66" cy="40" r="5" fill="#FFFFFF" />
+  </svg>
+);
+
+export const FastTypeCLogo: React.FC<{ className?: string }> = ({ className = 'w-8 h-8' }) => (
+  <svg viewBox="0 0 100 100" fill="none" className={className}>
+    <rect x="15" y="30" width="70" height="40" rx="20" stroke="#F59E0B" strokeWidth="6" fill="#1E1B4B" />
+    <rect x="30" y="44" width="40" height="12" rx="6" fill="#F59E0B" />
+    <circle cx="26" cy="50" r="3" fill="#FDE68A" />
+    <circle cx="74" cy="50" r="3" fill="#FDE68A" />
+  </svg>
+);
+
