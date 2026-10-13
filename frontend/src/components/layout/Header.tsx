@@ -884,10 +884,10 @@ export const Header: React.FC = () => {
                 </div>
                 <div className="pt-1 text-[10px] text-slate-400">
                   <a
-                    href="mailto:support@aroramobilehub.com"
+                    href="mailto:auroramobilesandgadgethub@gmail.com"
                     className="hover:text-cyan-300 underline decoration-dotted"
                   >
-                    support@aroramobilehub.com
+                    auroramobilesandgadgethub@gmail.com
                   </a>
                 </div>
               </div>

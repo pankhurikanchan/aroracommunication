@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { config } from '../config';
 import prisma from '../utils/prisma';
 import { AuthRequest } from '../middleware/auth';
+import { sendOrderConfirmationEmail } from '../services/emailService';
 
 export async function createPaymentOrder(req: Request, res: Response): Promise<void> {
   try {
@@ -262,6 +263,28 @@ export async function verifyAndCreateOrder(req: AuthRequest, res: Response): Pro
       } catch (e) {
         // continue
       }
+    }
+
+    // Send Order Confirmation Email asynchronously
+    if (order.address?.email) {
+      sendOrderConfirmationEmail({
+        orderNumber: order.orderNumber,
+        customerEmail: order.address.email,
+        customerName: order.address.fullName || 'Customer',
+        totalAmount: order.totalAmount,
+        paymentMethod: 'UPI',
+        items: order.items.map((it) => ({
+          productName: it.productName,
+          quantity: it.quantity,
+          price: it.price,
+        })),
+        shippingAddress: {
+          addressLine: order.address.addressLine,
+          city: order.address.city,
+          state: order.address.state,
+          pinCode: order.address.pinCode,
+        },
+      }).catch((err) => console.error('[PaymentController] Email dispatch failed:', err?.message));
     }
 
     res.status(201).json({

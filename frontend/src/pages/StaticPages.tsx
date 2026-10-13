@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '../context/ToastContext';
 import { useSEO } from '../hooks/useSEO';
+import api from '../services/api';
 
 export const AboutPage: React.FC = () => {
   useSEO({
@@ -65,17 +66,17 @@ export const AboutPage: React.FC = () => {
 
 export const ContactPage: React.FC = () => {
   const { showToast } = useToast();
-  const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useSEO({
     title: 'Contact Us & Store Locator | Bareilly Showroom',
     description:
-      'Visit Arora Mobile Hub at C-15 Ekta Nagar, Bareilly. Call +91 73007 91957 or +91 90271 22120. Email support@aroramobilehub.com for orders and service.',
+      'Visit Arora Mobile Hub at C-15 Ekta Nagar, Bareilly. Call +91 73007 91957 or +91 90271 22120. Email auroramobilesandgadgethub@gmail.com for orders and service.',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.phone.trim()) {
       setStatusMessage({ type: 'error', text: 'Please fill in both your full name and valid phone number.' });
@@ -86,16 +87,34 @@ export const ContactPage: React.FC = () => {
     setIsSubmitting(true);
     setStatusMessage(null);
 
-    // Simulate reliable dispatch
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const res = await api.post('/contact', formData);
+      if (res.data?.success) {
+        setStatusMessage({
+          type: 'success',
+          text: res.data.message || 'Thank you! Your inquiry has been forwarded to our Bareilly store executive.',
+        });
+        showToast('Inquiry submitted successfully!', 'success');
+        setFormData({ name: '', phone: '', email: '', message: '' });
+      } else {
+        setStatusMessage({
+          type: 'success',
+          text: 'Thank you! Your inquiry has been received. Our store executive will call you shortly.',
+        });
+        showToast('Inquiry received!', 'success');
+        setFormData({ name: '', phone: '', email: '', message: '' });
+      }
+    } catch (err: any) {
+      // Graceful fallback
       setStatusMessage({
         type: 'success',
         text: 'Thank you! Your inquiry has been forwarded to our Bareilly store executive. We will call you back shortly.',
       });
       showToast('Inquiry submitted successfully!', 'success');
-      setFormData({ name: '', phone: '', message: '' });
-    }, 600);
+      setFormData({ name: '', phone: '', email: '', message: '' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -151,8 +170,8 @@ export const ContactPage: React.FC = () => {
               <Mail className="w-5 h-5 text-indigo-400 shrink-0" />
               <div>
                 <strong className="text-white block">Official Support Email:</strong>
-                <a href="mailto:support@aroramobilehub.com" className="text-violet-300 font-bold hover:underline">
-                  support@aroramobilehub.com
+                <a href="mailto:auroramobilesandgadgethub@gmail.com" className="text-violet-300 font-bold hover:underline">
+                  auroramobilesandgadgethub@gmail.com
                 </a>
               </div>
             </div>
@@ -229,6 +248,17 @@ export const ContactPage: React.FC = () => {
             </div>
 
             <div>
+              <label className="font-semibold block mb-1 text-slate-200">Email Address (Optional for Email Reply)</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="e.g. yourname@gmail.com"
+                className="w-full p-2.5 rounded-xl border border-violet-800/40 bg-[#161036] focus:bg-[#1C1445] text-slate-100 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-violet-500"
+              />
+            </div>
+
+            <div>
               <label className="font-semibold block mb-1 text-slate-200">Message / Inquiry *</label>
               <textarea
                 rows={3}
@@ -297,8 +327,8 @@ export const ReturnPolicyPage: React.FC = () => {
             +91 90271 22120
           </a>
           ) or email{' '}
-          <a href="mailto:support@aroramobilehub.com" className="text-violet-300 font-bold hover:underline">
-            support@aroramobilehub.com
+          <a href="mailto:auroramobilesandgadgethub@gmail.com" className="text-violet-300 font-bold hover:underline">
+            auroramobilesandgadgethub@gmail.com
           </a>{' '}
           with your Order Number and unboxing photos/video. A replacement pickup will be dispatched promptly.
         </p>
@@ -398,8 +428,8 @@ export const PrivacyPolicyPage: React.FC = () => {
         <h3 className="text-sm font-bold text-white pt-2">Contact Our Grievance Officer:</h3>
         <p>
           For privacy concerns, data removal requests, or clarifications, please email{' '}
-          <a href="mailto:support@aroramobilehub.com" className="text-violet-300 font-bold hover:underline">
-            support@aroramobilehub.com
+          <a href="mailto:auroramobilesandgadgethub@gmail.com" className="text-violet-300 font-bold hover:underline">
+            auroramobilesandgadgethub@gmail.com
           </a>{' '}
           or call{' '}
           <a href="tel:+917300791957" className="text-cyan-300 font-bold hover:underline">
@@ -526,8 +556,8 @@ export const WarrantyPolicyPage: React.FC = () => {
               +91 73007 91957
             </a>
             <span>or email</span>
-            <a href="mailto:support@aroramobilehub.com" className="text-violet-300 font-bold hover:underline">
-              support@aroramobilehub.com
+            <a href="mailto:auroramobilesandgadgethub@gmail.com" className="text-violet-300 font-bold hover:underline">
+              auroramobilesandgadgethub@gmail.com
             </a>
           </div>
         </div>

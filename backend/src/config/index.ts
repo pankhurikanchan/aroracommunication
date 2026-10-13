@@ -23,5 +23,10 @@ export const config = {
   razorpay: {
     keyId: process.env.RAZORPAY_KEY_ID || 'rzp_test_arora_mock_key',
     keySecret: process.env.RAZORPAY_KEY_SECRET || 'rzp_test_arora_mock_secret',
+  },
+  email: {
+    user: process.env.EMAIL_USER || 'auroramobilesandgadgethub@gmail.com',
+    pass: process.env.EMAIL_PASS || '',
+    from: process.env.EMAIL_FROM || '"Arora Mobile Hub" <auroramobilesandgadgethub@gmail.com>',
   }
 };

@@ -13,6 +13,7 @@ import bannerRoutes from './bannerRoutes';
 import paymentRoutes from './paymentRoutes';
 import adminRoutes from './adminRoutes';
 import uploadRoutes from './uploadRoutes';
+import contactRoutes from './contactRoutes';
 
 const router = Router();
 
@@ -30,6 +31,7 @@ router.use('/banners', bannerRoutes);
 router.use('/payments', paymentRoutes);
 router.use('/admin', adminRoutes);
 router.use('/upload', uploadRoutes);
+router.use('/contact', contactRoutes);
 
 // API Health Check
 router.get('/health', (req, res) => {

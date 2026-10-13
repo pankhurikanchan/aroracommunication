@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { z } from 'zod';
 import { AuthRequest } from '../middleware/auth';
 import prisma from '../utils/prisma';
+import { sendOrderConfirmationEmail } from '../services/emailService';
 
 const orderSchema = z.object({
   shippingAddress: z.object({
@@ -160,6 +161,28 @@ export async function createOrder(req: AuthRequest, res: Response): Promise<void
       if (userCart) {
         await prisma.cartItem.deleteMany({ where: { cartId: userCart.id } });
       }
+    }
+
+    // Send Order Confirmation Email asynchronously
+    if (order.address?.email) {
+      sendOrderConfirmationEmail({
+        orderNumber: order.orderNumber,
+        customerEmail: order.address.email,
+        customerName: order.address.fullName || 'Customer',
+        totalAmount: order.totalAmount,
+        paymentMethod: order.paymentMethod,
+        items: order.items.map((it) => ({
+          productName: it.productName,
+          quantity: it.quantity,
+          price: it.price,
+        })),
+        shippingAddress: {
+          addressLine: order.address.addressLine,
+          city: order.address.city,
+          state: order.address.state,
+          pinCode: order.address.pinCode,
+        },
+      }).catch((err) => console.error('[OrderController] Email dispatch failed:', err?.message));
     }
 
     res.status(201).json({

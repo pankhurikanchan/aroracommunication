@@ -124,11 +124,11 @@ export const Footer: React.FC = () => {
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-violet-400 shrink-0" />
                 <a
-                  href="mailto:support@aroramobilehub.com"
+                  href="mailto:auroramobilesandgadgethub@gmail.com"
                   className="hover:text-cyan-300 font-semibold transition underline decoration-dotted"
-                  title="Send email to support@aroramobilehub.com"
+                  title="Send email to auroramobilesandgadgethub@gmail.com"
                 >
-                  support@aroramobilehub.com
+                  auroramobilesandgadgethub@gmail.com
                 </a>
               </div>
 
