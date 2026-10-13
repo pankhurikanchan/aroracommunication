@@ -40,7 +40,15 @@ export const WhyChooseUs: React.FC = () => {
       icon: <Headphones className="w-6 h-6 text-fuchsia-400" />,
       bg: 'bg-fuchsia-950/60 border-fuchsia-800/40 text-fuchsia-400',
       title: 'Dedicated Bareilly Support Desk',
-      desc: 'Talk to knowledgeable tech experts 7 days a week via direct phone call (+91 73007 91957), WhatsApp, or in person at our Bareilly store.',
+      desc: (
+        <span>
+          Talk to knowledgeable tech experts 7 days a week via direct phone call (
+          <a href="tel:+917300791957" className="text-cyan-300 font-bold hover:underline">
+            +91 73007 91957
+          </a>
+          ), WhatsApp, or in person at our Bareilly store.
+        </span>
+      ),
     },
     {
       icon: <Award className="w-6 h-6 text-amber-400" />,

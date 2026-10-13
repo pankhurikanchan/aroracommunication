@@ -12,8 +12,15 @@ import { WhyChooseUs } from '../components/home/WhyChooseUs';
 import { CustomerReviewsSection } from '../components/home/CustomerReviewsSection';
 import { Sparkles, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSEO } from '../hooks/useSEO';
 
 export const HomePage: React.FC = () => {
+  useSEO({
+    title: 'Smartphones, Laptops & Electronics in Bareilly',
+    description:
+      'Shop 100% genuine smartphones, iPhones, Samsung, OnePlus, laptops, smartwatches, and chargers at Arora Mobile Hub, C-15 Ekta Nagar, Bareilly. Official brand warranties & express delivery.',
+  });
+
   const [banners, setBanners] = useState<Banner[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [featuredPhones, setFeaturedPhones] = useState<Product[]>([]);

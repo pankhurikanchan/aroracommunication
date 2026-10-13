@@ -109,6 +109,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={primaryImage}
             alt={product.name}
             loading="lazy"
+            decoding="async"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src =
+                'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';
+            }}
             className="w-full h-full object-contain p-4 group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-500 ease-out"
           />
         </Link>

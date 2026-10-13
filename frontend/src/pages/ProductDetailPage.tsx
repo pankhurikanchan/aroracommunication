@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 
 import { useToast } from '../context/ToastContext';
+import { useSEO } from '../hooks/useSEO';
 
 export const ProductDetailPage: React.FC = () => {
   const { identifier } = useParams<{ identifier: string }>();
@@ -56,6 +57,13 @@ export const ProductDetailPage: React.FC = () => {
   const [submittingReview, setSubmittingReview] = useState(false);
   const [reviewMessage, setReviewMessage] = useState<string | null>(null);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  useSEO({
+    title: product ? `${product.name} - Buy Online` : 'Product Details',
+    description: product
+      ? `Buy genuine ${product.name} with official warranty at Arora Mobile Hub, C-15 Ekta Nagar, Bareilly. Best price, express delivery, and 7-day replacement.`
+      : undefined,
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -211,6 +219,11 @@ export const ProductDetailPage: React.FC = () => {
             <img
               src={selectedImage || product.images?.[0]?.url}
               alt={product.name}
+              decoding="async"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src =
+                  'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';
+              }}
               className="max-h-[380px] w-auto object-contain transition-all duration-300 hover:scale-105"
             />
 
@@ -241,7 +254,16 @@ export const ProductDetailPage: React.FC = () => {
                       : 'border-slate-200 hover:border-slate-400'
                   }`}
                 >
-                  <img src={img.url} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-contain" />
+                  <img
+                    src={img.url}
+                    alt={`Thumbnail ${idx + 1}`}
+                    decoding="async"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';
+                    }}
+                    className="w-full h-full object-contain"
+                  />
                 </button>
               ))}
             </div>

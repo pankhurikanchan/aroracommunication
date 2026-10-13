@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Lock, Mail, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export const LoginPage: React.FC = () => {
+  useSEO({
+    title: 'Customer & Admin Sign In',
+    description: 'Sign in to your Arora Mobile Hub account to track your orders, view wishlist items, or access admin control.',
+  });
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);

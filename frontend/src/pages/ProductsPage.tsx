@@ -13,6 +13,7 @@ import {
   Check,
 } from 'lucide-react';
 import { formatINR } from '../utils/formatters';
+import { useSEO } from '../hooks/useSEO';
 
 export const ProductsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,6 +47,24 @@ export const ProductsPage: React.FC = () => {
 
   // Mobile filter drawer state
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+  const activeCategoryObj = categories.find((c) => c.slug === selectedCategory);
+  const pageTitle = searchQuery
+    ? `Search: "${searchQuery}"`
+    : activeCategoryObj
+    ? `${activeCategoryObj.name} Store`
+    : 'All Products & Electronics Catalog';
+
+  const pageDesc = searchQuery
+    ? `Browse search results for "${searchQuery}" at Arora Mobile Hub Bareilly. 100% genuine products with official warranty.`
+    : activeCategoryObj
+    ? `Explore genuine ${activeCategoryObj.name} with official brand warranty and lowest price guarantee at Arora Mobile Hub Bareilly.`
+    : 'Explore all genuine smartphones, iPhones, Android devices, laptops, smartwatches, and chargers at Arora Mobile Hub Bareilly.';
+
+  useSEO({
+    title: pageTitle,
+    description: pageDesc,
+  });
 
   // Fetch filter metadata (categories, brands)
   useEffect(() => {
@@ -257,7 +276,7 @@ export const ProductsPage: React.FC = () => {
                 setPriceMax(e.target.value);
                 setCurrentPage(1);
               }}
-              placeholder="₹ 150000"
+              placeholder="₹ 1,50,000"
               className="w-full p-2 border border-slate-300 rounded-lg text-xs"
             />
           </div>

@@ -13,13 +13,15 @@ import {
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#070412] text-slate-300 pt-12 pb-8 border-t border-violet-950/70">
+    <footer className="bg-[#070412] text-slate-300 pt-12 pb-8 border-t border-violet-950/70 overflow-hidden">
       {/* Trust Badges Bar */}
       <div className="max-w-7xl mx-auto px-4 pb-10 border-b border-violet-950/70">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-cyan-400 shrink-0 shadow-sm">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -29,7 +31,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-violet-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-violet-400 shrink-0 shadow-sm">
               <Truck className="w-6 h-6" />
             </div>
             <div>
@@ -39,7 +41,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-emerald-400 shrink-0 shadow-sm">
               <RotateCcw className="w-6 h-6" />
             </div>
             <div>
@@ -49,7 +51,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-amber-400 shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-violet-950/80 border border-violet-500/30 flex items-center justify-center text-amber-400 shrink-0 shadow-sm">
               <CreditCard className="w-6 h-6" />
             </div>
             <div>
@@ -65,40 +67,76 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Info & Address */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-violet-600 p-0.5 flex items-center justify-center shadow-md">
+            {/* Clickable Brand Logo (Audit Point 17) */}
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2.5 group transition-transform"
+              aria-label="Arora Mobile Hub Home"
+            >
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-violet-600 p-0.5 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                 <div className="w-full h-full bg-slate-950 rounded-[6px] flex items-center justify-center">
                   <span className="text-white font-black text-sm">AM</span>
                 </div>
               </div>
-              <span className="text-xl font-extrabold text-white tracking-tight">
-                ARORA <span className="font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-300 bg-clip-text text-transparent">MOBILE HUB</span>
+              <span className="text-xl font-extrabold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                ARORA{' '}
+                <span className="font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-300 bg-clip-text text-transparent">
+                  MOBILE HUB
+                </span>
               </span>
-            </div>
+            </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed pr-4">
               Arora Mobile Hub is Bareilly’s premier destination for 100% genuine smartphones, flagship laptops,
               premium audio gear, and authentic mobile accessories. Serving customers with authentic products, official brand warranties,
-              and great prices.
+              and unbeatable transparent pricing.
             </p>
 
-            <div className="space-y-2 text-xs text-slate-300">
+            <div className="space-y-2.5 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-                <span>C-15, Ekta Nagar, Bareilly, Uttar Pradesh</span>
+                <span>C-15, Ekta Nagar, Bareilly, Uttar Pradesh - 243122</span>
               </div>
+
+              {/* Clickable Phone Numbers (Audit Point 18) */}
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <div className="flex flex-wrap gap-2">
-                  <a href="tel:+917300791957" className="hover:text-cyan-300 font-semibold">+91 73007 91957</a>
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href="tel:+917300791957"
+                    className="hover:text-cyan-300 font-semibold transition"
+                    title="Call +91 73007 91957"
+                  >
+                    +91 73007 91957
+                  </a>
                   <span>&bull;</span>
-                  <a href="tel:+919027122120" className="hover:text-emerald-300 font-semibold">+91 90271 22120</a>
+                  <a
+                    href="tel:+919027122120"
+                    className="hover:text-emerald-300 font-semibold transition"
+                    title="Call +91 90271 22120"
+                  >
+                    +91 90271 22120
+                  </a>
                 </div>
               </div>
+
+              {/* Clickable Email (Audit Point 19) */}
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-violet-400 shrink-0" />
+                <a
+                  href="mailto:support@aroramobilehub.com"
+                  className="hover:text-cyan-300 font-semibold transition underline decoration-dotted"
+                  title="Send email to support@aroramobilehub.com"
+                >
+                  support@aroramobilehub.com
+                </a>
+              </div>
+
               <div className="flex items-center gap-2.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span className="font-bold text-emerald-400">GSTIN: 09DIYPA1147P1ZK</span>
               </div>
+
               <div className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Mon - Sun: 10:00 AM – 9:30 PM (Open All 7 Days)</span>
@@ -216,13 +254,30 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Copyright */}
-      <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p>© 2026 Arora Mobile Hub. All rights reserved. &bull; GSTIN: 09DIYPA1147P1ZK</p>
+      {/* Bottom Copyright with Dynamic Year (Audit Point 9, 18) */}
+      <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p>
+          &copy; {currentYear} Arora Mobile Hub. All rights reserved. &bull; GSTIN: 09DIYPA1147P1ZK
+        </p>
         <p className="text-[11px]">
-          C-15 Ekta Nagar, Bareilly &bull; Helpline: +91 73007 91957, +91 90271 22120
+          C-15 Ekta Nagar, Bareilly &bull; Helpline:{' '}
+          <a
+            href="tel:+917300791957"
+            className="hover:text-cyan-300 font-semibold transition underline decoration-dotted"
+          >
+            +91 73007 91957
+          </a>
+          ,{' '}
+          <a
+            href="tel:+919027122120"
+            className="hover:text-emerald-300 font-semibold transition underline decoration-dotted"
+          >
+            +91 90271 22120
+          </a>
         </p>
       </div>
     </footer>
   );
 };
+
+export default Footer;

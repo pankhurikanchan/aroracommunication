@@ -268,8 +268,8 @@ export const Header: React.FC = () => {
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-3 shrink-0 group">
+        {/* Brand Logo (Audit Point 17) */}
+        <Link to="/" className="flex items-center gap-3 shrink-0 group" aria-label="Arora Mobile Hub Home">
           <div className="relative">
             <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-violet-600 opacity-60 blur-sm group-hover:opacity-100 transition duration-300" />
             <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-950 p-1.5 shadow-md flex items-center justify-center border border-violet-400/40 group-hover:scale-105 transition-transform duration-200">
@@ -561,9 +561,9 @@ export const Header: React.FC = () => {
                       <Link
                         to="/admin"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-amber-700 hover:bg-amber-50 transition"
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-amber-300 hover:bg-amber-950/40 hover:text-amber-200 transition"
                       >
-                        <LayoutDashboard className="w-4 h-4 text-amber-600" />
+                        <LayoutDashboard className="w-4 h-4 text-amber-400" />
                         Admin Dashboard & Catalog
                       </Link>
                     )}
@@ -571,37 +571,37 @@ export const Header: React.FC = () => {
                     <Link
                       to="/account?tab=orders"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition"
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-200 hover:bg-violet-950/60 hover:text-white transition"
                     >
-                      <Package className="w-4 h-4 text-slate-400" />
+                      <Package className="w-4 h-4 text-violet-400" />
                       My Orders & Trackers
                     </Link>
 
                     <Link
                       to="/account?tab=addresses"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition"
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-200 hover:bg-violet-950/60 hover:text-white transition"
                     >
-                      <MapPin className="w-4 h-4 text-slate-400" />
+                      <MapPin className="w-4 h-4 text-violet-400" />
                       Delivery Addresses
                     </Link>
 
                     <Link
                       to="/account?tab=profile"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition"
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-200 hover:bg-violet-950/60 hover:text-white transition"
                     >
-                      <User className="w-4 h-4 text-slate-400" />
+                      <User className="w-4 h-4 text-violet-400" />
                       Account Settings
                     </Link>
 
-                    <div className="border-t border-slate-100 mt-1.5 pt-1.5">
+                    <div className="border-t border-violet-900/40 mt-1.5 pt-1.5">
                       <button
                         onClick={() => {
                           setUserDropdownOpen(false);
                           logout();
                         }}
-                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-rose-600 hover:bg-rose-50 text-left font-medium transition"
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-rose-400 hover:bg-rose-950/40 hover:text-rose-300 text-left font-medium transition"
                       >
                         <LogOut className="w-4 h-4" />
                         Sign Out
@@ -679,60 +679,217 @@ export const Header: React.FC = () => {
         </div>
       </nav>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Drawer (Audit Points 3, 16, 18, 19, 20) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[115px] bg-[#070412]/80 z-40 backdrop-blur-md animate-in fade-in">
-          <div className="w-72 h-full bg-[#0D0922] shadow-2xl p-5 overflow-y-auto border-r border-violet-900/40 text-slate-200">
-            <div className="font-extrabold text-xs text-violet-400 mb-3 uppercase tracking-wider">
-              Browse Categories
-            </div>
-            <div className="space-y-1">
-              {NAV_CATEGORIES.map((cat) => (
+        <div
+          className="lg:hidden fixed inset-0 top-0 bg-[#070412]/80 z-50 backdrop-blur-md animate-in fade-in"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div
+            className="w-80 max-w-[85vw] h-full bg-[#0D0922] shadow-2xl p-5 overflow-y-auto border-r border-violet-900/40 text-slate-200 flex flex-col justify-between"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div>
+              {/* Drawer Header with Close Button */}
+              <div className="flex items-center justify-between pb-4 border-b border-violet-900/40 mb-4">
                 <Link
-                  key={cat.slug || 'all'}
-                  to={cat.isAll ? '/products' : `/category/${cat.slug}`}
+                  to="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-xl text-sm font-semibold transition ${
-                    cat.isAll
-                      ? 'text-cyan-300 bg-violet-950/60 font-bold border border-violet-800/40'
-                      : 'text-slate-300 hover:text-white hover:bg-violet-950/40'
-                  }`}
+                  className="flex items-center gap-2"
                 >
-                  {cat.name}
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-violet-600 p-0.5 flex items-center justify-center">
+                    <div className="w-full h-full bg-slate-950 rounded-[4px] flex items-center justify-center">
+                      <span className="text-white font-black text-xs">AM</span>
+                    </div>
+                  </div>
+                  <span className="font-extrabold text-white text-sm tracking-tight">
+                    ARORA <span className="bg-gradient-to-r from-violet-400 to-cyan-300 bg-clip-text text-transparent">HUB</span>
+                  </span>
                 </Link>
-              ))}
+
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-violet-950/60 transition"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Quick Primary Links */}
+              <div className="space-y-1 mb-5">
+                <Link
+                  to="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:bg-violet-950/60 transition"
+                >
+                  <span>🏠</span>
+                  <span>Store Home</span>
+                </Link>
+
+                <Link
+                  to="/products"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:bg-violet-950/60 transition"
+                >
+                  <span>🛍️</span>
+                  <span>All Products</span>
+                </Link>
+
+                <Link
+                  to="/deals"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-amber-300 bg-gradient-to-r from-amber-500/10 to-rose-500/10 border border-amber-500/20 transition"
+                >
+                  <span className="flex items-center gap-2">
+                    <Flame className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Deals & Special Offers</span>
+                  </span>
+                  <span className="text-[10px] bg-rose-500 text-white font-extrabold px-1.5 py-0.5 rounded-md">HOT</span>
+                </Link>
+
+                <Link
+                  to="/cart"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:bg-violet-950/60 transition"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <ShoppingCart className="w-4 h-4 text-violet-400" />
+                    <span>Shopping Cart</span>
+                  </span>
+                  {itemCount > 0 && (
+                    <span className="bg-violet-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">
+                      {itemCount}
+                    </span>
+                  )}
+                </Link>
+
+                <Link
+                  to="/account?tab=wishlist"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:bg-violet-950/60 transition"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Heart className="w-4 h-4 text-rose-400" />
+                    <span>My Wishlist</span>
+                  </span>
+                  {wishlistIds.size > 0 && (
+                    <span className="bg-rose-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">
+                      {wishlistIds.size}
+                    </span>
+                  )}
+                </Link>
+
+                {user ? (
+                  <Link
+                    to="/account"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-cyan-300 hover:bg-violet-950/60 transition"
+                  >
+                    <User className="w-4 h-4 text-cyan-400" />
+                    <span>My Account ({user.name.split(' ')[0]})</span>
+                  </Link>
+                ) : (
+                  <div className="grid grid-cols-2 gap-2 pt-1 pb-1">
+                    <Link
+                      to="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="px-3 py-2 text-center text-xs font-bold text-slate-200 bg-violet-950/60 hover:bg-violet-900/60 border border-violet-800/40 rounded-xl transition"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      to="/register"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="px-3 py-2 text-center text-xs font-bold text-white bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl shadow transition"
+                    >
+                      Register
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Category Links */}
+              <div className="font-extrabold text-[11px] text-violet-400 mb-2 uppercase tracking-wider">
+                Browse Categories
+              </div>
+              <div className="space-y-0.5 max-h-52 overflow-y-auto pr-1">
+                {NAV_CATEGORIES.filter((c) => !c.isAll).map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    to={`/category/${cat.slug}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-violet-950/40 transition"
+                  >
+                    {cat.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
-            <div className="border-t border-violet-900/30 mt-5 pt-4 space-y-2.5">
+            {/* Bottom Drawer Footer */}
+            <div className="border-t border-violet-900/30 pt-4 mt-4 space-y-2.5">
               <Link
                 to="/admin"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-300 font-bold text-xs shadow-sm hover:scale-[1.01] transition"
+                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-300 font-bold text-xs shadow-sm transition"
               >
                 <ShieldCheck className="w-4 h-4 text-amber-400" />
                 <span>👑 Store Owner / Admin Portal</span>
               </Link>
-              <Link
-                to="/about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-xs font-semibold text-slate-400 hover:text-violet-300 px-3 py-1"
-              >
-                About Arora Mobile Hub
-              </Link>
-              <Link
-                to="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-xs font-semibold text-slate-400 hover:text-violet-300 px-3 py-1"
-              >
-                Store: C-15 Ekta Nagar, Bareilly
-              </Link>
-              <div className="px-3 pt-2 text-[11px] text-slate-400 border-t border-violet-900/30">
-                <div className="font-bold text-slate-200">Helpline Numbers:</div>
-                <div className="flex flex-col gap-1 mt-1 font-semibold text-cyan-400">
-                  <a href="tel:+917300791957">+91 73007 91957</a>
-                  <a href="tel:+919027122120">+91 90271 22120</a>
+
+              <div className="grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-400 pt-1">
+                <Link
+                  to="/about"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="hover:text-cyan-300 transition"
+                >
+                  About Us
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="hover:text-cyan-300 transition text-right"
+                >
+                  Store Locator
+                </Link>
+                <Link
+                  to="/return-policy"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="hover:text-cyan-300 transition"
+                >
+                  Return Policy
+                </Link>
+                <Link
+                  to="/shipping-policy"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="hover:text-cyan-300 transition text-right"
+                >
+                  Shipping Rates
+                </Link>
+              </div>
+
+              {/* Clickable Helpline & WhatsApp */}
+              <div className="p-3 rounded-xl bg-violet-950/40 border border-violet-900/40 space-y-1 text-[11px]">
+                <div className="text-slate-400 font-bold">Bareilly Helpline Desk:</div>
+                <div className="flex flex-col gap-1 font-semibold text-cyan-300">
+                  <a href="tel:+917300791957" className="hover:underline flex items-center gap-1.5">
+                    <PhoneCall className="w-3 h-3 text-cyan-400" />
+                    <span>+91 73007 91957</span>
+                  </a>
+                  <a href="tel:+919027122120" className="hover:underline flex items-center gap-1.5">
+                    <PhoneCall className="w-3 h-3 text-emerald-400" />
+                    <span>+91 90271 22120</span>
+                  </a>
                 </div>
-                <div className="text-[10px] text-slate-500 mt-1 font-medium">GSTIN: 09DIYPA1147P1ZK</div>
+                <div className="pt-1 text-[10px] text-slate-400">
+                  <a
+                    href="mailto:support@aroramobilehub.com"
+                    className="hover:text-cyan-300 underline decoration-dotted"
+                  >
+                    support@aroramobilehub.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>

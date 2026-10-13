@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   CreditCard,
 } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 const ORDER_STEPS: { status: OrderStatus; label: string }[] = [
   { status: 'ORDER_PLACED', label: 'Order Placed' },
@@ -26,6 +27,12 @@ const ORDER_STEPS: { status: OrderStatus; label: string }[] = [
 
 export const OrderSuccessPage: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
+
+  useSEO({
+    title: orderId ? `Order #${orderId} Confirmed` : 'Order Confirmation',
+    description: 'Thank you for your purchase at Arora Mobile Hub Bareilly. View your order receipt and tracking status.',
+  });
+
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
 

@@ -10,7 +10,16 @@ import { OrderSuccessPage } from './pages/OrderSuccessPage';
 import { AccountPage } from './pages/AccountPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
-import { AboutPage, ContactPage, ReturnPolicyPage, ShippingPolicyPage } from './pages/StaticPages';
+import {
+  AboutPage,
+  ContactPage,
+  ReturnPolicyPage,
+  ShippingPolicyPage,
+  PrivacyPolicyPage,
+  TermsConditionsPage,
+  WarrantyPolicyPage,
+} from './pages/StaticPages';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 // Admin Pages
 import { AdminLayout } from './layouts/AdminLayout';
@@ -44,6 +53,11 @@ export const App: React.FC = () => {
         <Route path="contact" element={<ContactPage />} />
         <Route path="return-policy" element={<ReturnPolicyPage />} />
         <Route path="shipping-policy" element={<ShippingPolicyPage />} />
+        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="terms-conditions" element={<TermsConditionsPage />} />
+        <Route path="warranty-policy" element={<WarrantyPolicyPage />} />
+        {/* Wildcard 404 Route */}
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
 
       {/* Admin Panel Layout */}
@@ -56,6 +70,7 @@ export const App: React.FC = () => {
         <Route path="banners" element={<AdminBanners />} />
         <Route path="reviews" element={<AdminReviews />} />
         <Route path="users" element={<AdminUsers />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

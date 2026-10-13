@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Lock, Mail, User, Phone, AlertCircle, ArrowRight } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export const RegisterPage: React.FC = () => {
+  useSEO({
+    title: 'Create an Account',
+    description: 'Register for an Arora Mobile Hub account for fast checkout, exclusive member offers, and order tracking.',
+  });
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');

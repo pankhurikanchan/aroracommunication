@@ -12,8 +12,14 @@ import {
   AlertCircle,
   Truck,
 } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export const CartPage: React.FC = () => {
+  useSEO({
+    title: 'Shopping Cart',
+    description: 'Review your selected smartphones, audio gear, and accessories in your Arora Mobile Hub cart.',
+  });
+
   const {
     cart,
     subtotal,

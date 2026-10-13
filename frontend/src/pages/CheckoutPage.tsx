@@ -23,8 +23,14 @@ import {
   CheckCheck,
   Smartphone,
 } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export const CheckoutPage: React.FC = () => {
+  useSEO({
+    title: 'Secure Checkout',
+    description: 'Complete your order with secure UPI, Cards, NetBanking, or COD at Arora Mobile Hub Bareilly.',
+  });
+
   const { user } = useAuth();
   const { cart, subtotal, discount, deliveryCharge, finalTotal, coupon, clearCart } = useCart();
   const navigate = useNavigate();

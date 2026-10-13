@@ -21,10 +21,24 @@ import {
   CreditCard,
   CheckCircle,
 } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 export const AccountPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'orders';
+
+  const tabLabels: Record<string, string> = {
+    orders: 'My Orders & Tracking',
+    wishlist: 'My Wishlist',
+    addresses: 'Saved Addresses',
+    profile: 'Profile & Security',
+  };
+
+  useSEO({
+    title: `Account - ${tabLabels[activeTab] || 'Dashboard'}`,
+    description: 'Manage your Arora Mobile Hub account, track your orders, manage delivery addresses, and view your wishlist.',
+  });
+
   const { user, updateUser, logout } = useAuth();
   const { wishlistProducts, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
