@@ -93,7 +93,7 @@ export const CheckoutPage: React.FC = () => {
   const [couponFeedback, setCouponFeedback] = useState<{ text: string; error?: boolean } | null>(null);
 
   // Step 4: Payment State
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('UPI');
+  const [paymentMethod, setPaymentMethod] = useState<'RAZORPAY' | 'UPI' | 'NET_BANKING' | 'CASH_ON_DELIVERY'>('RAZORPAY');
   const [transactionRef, setTransactionRef] = useState('');
   const [upiPaidConfirmed, setUpiPaidConfirmed] = useState(false);
   const [codConfirmed, setCodConfirmed] = useState(false);
@@ -102,6 +102,132 @@ export const CheckoutPage: React.FC = () => {
 
   // General Error Notice
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if ((window as any).Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleRazorpayPayment = async () => {
+    try {
+      setErrorMessage(null);
+      setPlacingOrder(true);
+
+      const rzpLoaded = await loadRazorpayScript();
+      if (!rzpLoaded) {
+        setErrorMessage('Failed to load Razorpay payment SDK. Please verify your internet connection.');
+        setPlacingOrder(false);
+        return;
+      }
+
+      // 1. Create order on backend
+      const res = await api.post('/payments/create-order', {
+        amount: finalTotal,
+        receipt: `rcpt_${Date.now()}`,
+      });
+
+      if (!res.data.success) {
+        setErrorMessage(res.data.message || 'Failed to initialize payment gateway.');
+        setPlacingOrder(false);
+        return;
+      }
+
+      const rzpData = res.data.data;
+
+      // 2. Open Razorpay Checkout modal
+      const options = {
+        key: rzpData.keyId,
+        amount: rzpData.amount,
+        currency: rzpData.currency || 'INR',
+        name: 'Arora Mobile Hub',
+        description: `Electronics Order (${cart.items.length} items)`,
+        image: 'https://aroramobilesandgadgethub.com/logo-icon.svg',
+        order_id: rzpData.id,
+        handler: async function (response: any) {
+          try {
+            setPlacingOrder(true);
+            const verifyPayload = {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              items: cart.items.map((i) => ({
+                productId: i.productId,
+                variantId: i.variantId || null,
+                quantity: i.quantity,
+                price: i.price,
+                productName: i.product?.name || 'Electronics Product',
+                productImage: i.product?.images?.[0]?.url || null,
+              })),
+              addressId: selectedAddressId && !useNewAddress ? selectedAddressId : undefined,
+              shippingAddress:
+                useNewAddress || savedAddresses.length === 0
+                  ? {
+                      fullName: addressForm.fullName.trim() || accountForm.fullName.trim(),
+                      phone: addressForm.phone.trim() || accountForm.phone.trim(),
+                      email: addressForm.email.trim() || accountForm.email.trim(),
+                      addressLine: addressForm.addressLine.trim(),
+                      city: addressForm.city.trim(),
+                      state: addressForm.state.trim(),
+                      pinCode: addressForm.pinCode.trim(),
+                    }
+                  : undefined,
+              couponCode: coupon?.code || null,
+              notes: `Customer Contact: ${addressForm.phone || accountForm.phone}`,
+            };
+
+            const verifyRes = await api.post('/payments/verify-and-create-order', verifyPayload);
+            if (verifyRes.data.success) {
+              await clearCart();
+              navigate(`/order-confirmation/${verifyRes.data.data.orderNumber}`);
+            } else {
+              setErrorMessage(verifyRes.data.message || 'Payment signature verification failed.');
+            }
+          } catch (err: any) {
+            setErrorMessage(err.response?.data?.message || 'Error creating order after payment.');
+          } finally {
+            setPlacingOrder(false);
+          }
+        },
+        prefill: {
+          name: addressForm.fullName.trim() || accountForm.fullName.trim(),
+          email: addressForm.email.trim() || accountForm.email.trim(),
+          contact: addressForm.phone.trim() || accountForm.phone.trim(),
+        },
+        notes: {
+          store: 'Arora Mobile Hub, Bareilly',
+          gstin: '09DIYPA1147P1ZK',
+        },
+        theme: {
+          color: '#7C3AED',
+        },
+        modal: {
+          ondismiss: function () {
+            setPlacingOrder(false);
+          },
+        },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.on('payment.failed', function (failResp: any) {
+        setErrorMessage(failResp.error?.description || 'Payment was unsuccessful. Please try again.');
+        setPlacingOrder(false);
+      });
+      rzp.open();
+    } catch (err: any) {
+      setErrorMessage(err.response?.data?.message || 'Error opening Razorpay payment window.');
+      setPlacingOrder(false);
+    }
+  };
 
   // Initialize Account Details from logged-in user
   useEffect(() => {
@@ -1232,7 +1358,24 @@ export const CheckoutPage: React.FC = () => {
                   Select Your Payment Method:
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {/* UPI */}
+                  {/* Option 1: Razorpay Instant Gateway (Featured) */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('RAZORPAY')}
+                    className={`p-4 rounded-2xl border flex flex-col items-center justify-center gap-2 text-xs font-extrabold transition relative ${
+                      paymentMethod === 'RAZORPAY'
+                        ? 'border-cyan-400 bg-gradient-to-b from-violet-950 to-indigo-950 text-cyan-200 ring-2 ring-cyan-400/40 shadow-xl'
+                        : 'border-violet-900/40 bg-[#161036] text-slate-300 hover:border-violet-700'
+                    }`}
+                  >
+                    <span className="absolute -top-2.5 bg-gradient-to-r from-cyan-400 to-indigo-500 text-black text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow">
+                      Recommended
+                    </span>
+                    <CreditCard className="w-6 h-6 text-cyan-400 mt-1" />
+                    <span className="text-center font-black">Razorpay Gateway (UPI, Cards, EMI)</span>
+                  </button>
+
+                  {/* Option 2: Direct Kotak UPI QR */}
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('UPI')}
@@ -1242,25 +1385,11 @@ export const CheckoutPage: React.FC = () => {
                         : 'border-violet-900/40 bg-[#161036] text-slate-300 hover:border-violet-700'
                     }`}
                   >
-                    <Smartphone className="w-6 h-6 text-cyan-400" />
-                    <span>Instant UPI (GPay/PhonePe)</span>
+                    <Smartphone className="w-6 h-6 text-violet-400" />
+                    <span className="text-center">Direct Kotak UPI QR (Manual UTR)</span>
                   </button>
 
-                  {/* Net Banking */}
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('NET_BANKING')}
-                    className={`p-4 rounded-2xl border flex flex-col items-center justify-center gap-2 text-xs font-extrabold transition ${
-                      paymentMethod === 'NET_BANKING'
-                        ? 'border-cyan-400 bg-violet-950/80 text-cyan-200 ring-2 ring-cyan-400/40 shadow-lg'
-                        : 'border-violet-900/40 bg-[#161036] text-slate-300 hover:border-violet-700'
-                    }`}
-                  >
-                    <Building className="w-6 h-6 text-indigo-400" />
-                    <span>Bank Transfer (NEFT/IMPS)</span>
-                  </button>
-
-                  {/* COD */}
+                  {/* Option 3: Cash on Delivery */}
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('CASH_ON_DELIVERY')}
@@ -1271,10 +1400,72 @@ export const CheckoutPage: React.FC = () => {
                     }`}
                   >
                     <Banknote className="w-6 h-6 text-amber-400" />
-                    <span>Cash on Delivery</span>
+                    <span className="text-center">Cash on Delivery (Doorstep)</span>
                   </button>
                 </div>
               </div>
+
+              {/* PAYMENT OPTION 1: RAZORPAY INSTANT GATEWAY */}
+              {paymentMethod === 'RAZORPAY' && (
+                <div className="p-5 sm:p-6 rounded-3xl bg-[#140F30] border border-cyan-500/40 space-y-5">
+                  <div className="flex items-center justify-between pb-3 border-b border-violet-900/40">
+                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-cyan-300">
+                      <CreditCard className="w-5 h-5 text-cyan-400" />
+                      <span>Razorpay Official Payment Gateway</span>
+                    </div>
+                    <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-0.5 rounded-full">
+                      Instant Order Confirmation
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Pay instantly with 100% bank-grade encryption. All major payment options are supported:
+                    </p>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center text-[11px] font-bold text-slate-200">
+                      <div className="p-2.5 rounded-xl bg-[#18113A] border border-violet-800/40">
+                        📱 UPI Apps (GPay, PhonePe, Paytm, BHIM)
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-[#18113A] border border-violet-800/40">
+                        💳 Cards (Visa, Mastercard, RuPay)
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-[#18113A] border border-violet-800/40">
+                        🏦 50+ Major Indian Banks
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-[#18113A] border border-violet-800/40">
+                        ⚡ Cred Pay, Wallets & EMI
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-cyan-950/40 border border-cyan-600/40 text-xs text-cyan-200 flex items-start gap-3">
+                      <ShieldCheck className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                      <div className="space-y-1">
+                        <strong className="text-white block">How it works:</strong>
+                        <p className="text-slate-300 leading-relaxed">
+                          1. Click the button below to launch the official Razorpay payment window.<br />
+                          2. Complete the payment using your preferred app or card.<br />
+                          3. Once payment succeeds, your order is automatically verified and confirmed in real time with zero manual UTR entry needed!
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleRazorpayPayment}
+                      disabled={placingOrder}
+                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-black text-sm shadow-2xl shadow-indigo-950/80 flex items-center justify-center gap-2 transition hover:scale-[1.01] disabled:opacity-50"
+                    >
+                      <Lock className="w-4 h-4" />
+                      <span>
+                        {placingOrder
+                          ? 'Opening Razorpay Gateway...'
+                          : `Launch Razorpay & Pay ${formatINR(finalTotal)}`}
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* PAYMENT OPTION 1: UPI WINDOW */}
               {paymentMethod === 'UPI' && (
@@ -1604,7 +1795,11 @@ export const CheckoutPage: React.FC = () => {
               {currentStep === 4 && (
                 <button
                   type="button"
-                  onClick={handleCompletePaymentAndPlaceOrder}
+                  onClick={
+                    paymentMethod === 'RAZORPAY'
+                      ? handleRazorpayPayment
+                      : handleCompletePaymentAndPlaceOrder
+                  }
                   disabled={placingOrder}
                   className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-black text-xs shadow-2xl shadow-emerald-950/70 transition flex items-center justify-center gap-2 disabled:opacity-50"
                 >
@@ -1612,6 +1807,8 @@ export const CheckoutPage: React.FC = () => {
                   <span>
                     {placingOrder
                       ? 'Authorizing Order...'
+                      : paymentMethod === 'RAZORPAY'
+                      ? `Pay via Razorpay • ${formatINR(finalTotal)}`
                       : paymentMethod === 'CASH_ON_DELIVERY'
                       ? `Place COD Order • ${formatINR(finalTotal)}`
                       : `Submit Payment & Place Order`}
