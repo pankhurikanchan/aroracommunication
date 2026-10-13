@@ -27,6 +27,7 @@ const orderSchema = z.object({
   paymentMethod: z.enum(['UPI', 'CREDIT_CARD', 'DEBIT_CARD', 'NET_BANKING', 'CASH_ON_DELIVERY']),
   couponCode: z.string().optional().nullable(),
   notes: z.string().optional().nullable(),
+  transactionId: z.string().optional().nullable(),
 });
 
 export async function createOrder(req: AuthRequest, res: Response): Promise<void> {
@@ -92,7 +93,14 @@ export async function createOrder(req: AuthRequest, res: Response): Promise<void
     const randomSuffix = Math.floor(10000 + Math.random() * 90000);
     const orderNumber = `ARC-${new Date().getFullYear()}-${randomSuffix}`;
 
-    const initialPaymentStatus = validated.paymentMethod === 'CASH_ON_DELIVERY' ? 'PENDING' : 'COMPLETED';
+    // All orders start with PENDING payment status until explicitly verified by admin or payment gateway
+    const initialPaymentStatus = 'PENDING';
+    const txnId = validated.transactionId?.trim() || null;
+
+    let finalNotes = validated.notes || '';
+    if (txnId) {
+      finalNotes = finalNotes ? `${finalNotes} | Customer UTR/Ref: ${txnId}` : `Customer UTR/Ref: ${txnId}`;
+    }
 
     const order = await prisma.order.create({
       data: {
@@ -107,7 +115,7 @@ export async function createOrder(req: AuthRequest, res: Response): Promise<void
         deliveryCharge,
         totalAmount,
         couponCode: validated.couponCode,
-        notes: validated.notes,
+        notes: finalNotes || null,
         items: {
           create: validated.items.map((item) => ({
             productId: item.productId,
@@ -123,7 +131,7 @@ export async function createOrder(req: AuthRequest, res: Response): Promise<void
             method: validated.paymentMethod,
             amount: totalAmount,
             status: initialPaymentStatus,
-            transactionId: validated.paymentMethod !== 'CASH_ON_DELIVERY' ? `TXN-${Date.now()}` : null,
+            transactionId: txnId,
           },
         },
       },
@@ -315,6 +323,13 @@ export async function updateOrderStatus(req: AuthRequest, res: Response): Promis
         payments: true,
       },
     });
+
+    if (paymentStatus) {
+      await prisma.payment.updateMany({
+        where: { orderId: id },
+        data: { status: paymentStatus },
+      });
+    }
 
     res.status(200).json({ success: true, message: 'Order status updated', data: order });
   } catch (error: any) {

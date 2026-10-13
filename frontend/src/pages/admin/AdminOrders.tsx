@@ -64,6 +64,21 @@ export const AdminOrders: React.FC = () => {
     setTrackingNumber(ord.trackingNumber || '');
   };
 
+  const handleQuickVerifyPayment = async (orderId: string) => {
+    if (!window.confirm('Mark this order as COMPLETED (Paid & Verified)?')) return;
+    try {
+      const res = await api.put(`/orders/admin/${orderId}/status`, {
+        paymentStatus: 'COMPLETED',
+      });
+      if (res.data.success) {
+        fetchOrders();
+      }
+    } catch (err) {
+      console.error('Error verifying payment:', err);
+      alert('Failed to update payment status.');
+    }
+  };
+
   const handleUpdateStatus = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedOrder) return;
@@ -175,18 +190,28 @@ export const AdminOrders: React.FC = () => {
                     </td>
 
                     <td className="py-3 px-4">
-                      <span className="font-medium text-slate-800 block">{ord.paymentMethod}</span>
+                      <span className="font-bold text-slate-800 block text-[11px]">{ord.paymentMethod.replace(/_/g, ' ')}</span>
                       <span
-                        className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                        className={`inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-md mt-0.5 ${
                           ord.paymentStatus === 'COMPLETED'
-                            ? 'bg-emerald-50 text-emerald-700'
-                            : 'bg-amber-50 text-amber-700'
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                            : 'bg-amber-100 text-amber-800 border border-amber-300'
                         }`}
                       >
-                        {ord.paymentStatus}
+                        {ord.paymentStatus === 'COMPLETED' ? '🟢 Paid & Verified' : '🟡 Pending'}
                       </span>
+                      {ord.paymentStatus !== 'COMPLETED' && (
+                        <button
+                          type="button"
+                          onClick={() => handleQuickVerifyPayment(ord.id)}
+                          className="block mt-1 text-[11px] font-extrabold text-emerald-600 hover:text-emerald-800 hover:underline"
+                          title="Verify received transfer and mark as Paid & Verified"
+                        >
+                          ✔ Mark as Paid
+                        </button>
+                      )}
                       {ord.notes && (
-                        <span className="text-[10px] text-slate-500 block mt-1 truncate max-w-[150px]" title={ord.notes}>
+                        <span className="text-[10px] text-slate-500 block mt-1 truncate max-w-[170px]" title={ord.notes}>
                           {ord.notes}
                         </span>
                       )}
@@ -286,10 +311,10 @@ export const AdminOrders: React.FC = () => {
                   onChange={(e) => setNewPaymentStatus(e.target.value)}
                   className="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-bold"
                 >
-                  <option value="PENDING">PENDING</option>
-                  <option value="COMPLETED">COMPLETED</option>
-                  <option value="FAILED">FAILED</option>
-                  <option value="REFUNDED">REFUNDED</option>
+                  <option value="PENDING">PENDING (Unverified / Payment Due)</option>
+                  <option value="COMPLETED">COMPLETED (Paid & Verified)</option>
+                  <option value="FAILED">FAILED (Transaction Failed)</option>
+                  <option value="REFUNDED">REFUNDED (Returned / Refunded)</option>
                 </select>
               </div>
 
