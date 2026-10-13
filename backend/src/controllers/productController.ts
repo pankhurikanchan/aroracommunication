@@ -32,12 +32,15 @@ export async function getProducts(req: Request, res: Response): Promise<void> {
     // Search query matching product name, description, SKU, brand name, or category name
     if (search && typeof search === 'string' && search.trim() !== '') {
       const q = search.trim();
+      const isPostgres = Boolean(process.env.VERCEL || process.env.DATABASE_URL?.startsWith('postgres'));
+      const strMatch = () => (isPostgres ? { contains: q, mode: 'insensitive' } : { contains: q });
+
       where.OR = [
-        { name: { contains: q } },
-        { description: { contains: q } },
-        { sku: { contains: q } },
-        { brand: { name: { contains: q } } },
-        { category: { name: { contains: q } } },
+        { name: strMatch() },
+        { description: strMatch() },
+        { sku: strMatch() },
+        { brand: { name: strMatch() } },
+        { category: { name: strMatch() } },
       ];
     }
 

@@ -7,13 +7,14 @@ import {
   deleteBanner,
 } from '../controllers/bannerController';
 import { authenticateToken, requireAdmin } from '../middleware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
-router.get('/', getBanners);
-router.get('/all', authenticateToken, requireAdmin, getAllBanners);
-router.post('/', authenticateToken, requireAdmin, createBanner);
-router.put('/:id', authenticateToken, requireAdmin, updateBanner);
-router.delete('/:id', authenticateToken, requireAdmin, deleteBanner);
+router.get('/', asyncHandler(getBanners));
+router.get('/all', authenticateToken, requireAdmin, asyncHandler(getAllBanners));
+router.post('/', authenticateToken, requireAdmin, asyncHandler(createBanner));
+router.put('/:id', authenticateToken, requireAdmin, asyncHandler(updateBanner));
+router.delete('/:id', authenticateToken, requireAdmin, asyncHandler(deleteBanner));
 
 export default router;

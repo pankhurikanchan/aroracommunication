@@ -7,57 +7,80 @@ import fs from 'fs';
 import { config } from './config';
 import apiRouter from './routes';
 import { errorHandler } from './middleware/errorHandler';
+import { requestIdMiddleware } from './middleware/requestId';
+import { apiLimiter } from './middleware/rateLimiter';
 
 export const app = express();
 
-// Security middleware
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-  contentSecurityPolicy: false, // Allow inline styles & scripts from React/Vite build
-}));
+// 1. Request Correlation ID
+app.use(requestIdMiddleware);
 
-// CORS configuration supporting localhost, custom domains, and AWS/Vercel deployments
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, curl, server-to-server)
-    if (!origin) return callback(null, true);
+// 2. Security HTTP Headers
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    contentSecurityPolicy: false, // Allows inline styles & scripts from modern Vite frontend builds
+    hsts: config.isProduction ? { maxAge: 31536000, includeSubDomains: true, preload: true } : false,
+  })
+);
 
-    const allowedOrigins = [
-      config.clientUrl,
-      'http://localhost:3000',
-      'http://127.0.0.1:3000',
-      'http://localhost:5173',
-      'http://127.0.0.1:5173',
-      'http://localhost:5000',
-      'http://127.0.0.1:5000',
-    ];
+// 3. Robust CORS Policy
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow mobile apps, curl, server-to-server requests without Origin header
+      if (!origin) return callback(null, true);
 
-    const isVercelDomain = origin.endsWith('.vercel.app');
-    const isAwsDomain = origin.endsWith('.amazonaws.com');
-    const isAllowed = allowedOrigins.includes(origin) || isVercelDomain || isAwsDomain;
+      const allowedOrigins = [
+        config.clientUrl,
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+        'http://localhost:5000',
+        'http://127.0.0.1:5000',
+        'http://localhost:8081',
+      ];
 
-    if (isAllowed || config.nodeEnv !== 'production') {
-      return callback(null, true);
-    }
+      const isVercelDomain = origin.endsWith('.vercel.app');
+      const isAwsDomain = origin.endsWith('.amazonaws.com');
+      const isAllowed = allowedOrigins.includes(origin) || isVercelDomain || isAwsDomain;
 
-    callback(null, true); // Permissive CORS for public ecommerce API
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-guest-session-id'],
-}));
+      if (isAllowed || !config.isProduction) {
+        return callback(null, true);
+      }
 
+      callback(null, true); // Public ecommerce API
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-guest-session-id', 'x-request-id', 'x-guest-email', 'x-guest-phone'],
+    exposedHeaders: ['X-Request-Id'],
+  })
+);
+
+// 4. Request Logging & Body Parsers
 app.use(morgan(config.nodeEnv === 'development' ? 'dev' : 'combined'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Serve static uploads (for local dev fallback)
+// 5. Serve local static uploads fallback
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
-// Mount all API routes under /api
+// 6. Global API Rate Limiting & Routes
+app.use('/api', apiLimiter);
 app.use('/api', apiRouter);
 
-// Serve Frontend SPA if built (frontend/dist or local public)
+// Explicit 404 for unmatched /api routes
+app.all('/api/*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `API endpoint not found: ${req.method} ${req.originalUrl}`,
+    requestId: (req as any).id,
+  });
+});
+
+// 7. Serve Frontend SPA if built (frontend/dist or local public)
 const possibleFrontendPaths = [
   path.join(__dirname, '../../frontend/dist'),
   path.join(process.cwd(), '../frontend/dist'),
@@ -86,16 +109,18 @@ if (frontendDistPath) {
   // API Welcome & Health Route when frontend is not built in the same folder
   app.get('/', (req, res) => {
     res.json({
-      message: 'Welcome to Arora Communication API',
-      shop: 'Arora Communication',
-      healthCheck: '/api/health',
+      message: 'Welcome to Arora Communication Production API',
+      shop: 'Arora Mobiles and Gadget Hub',
+      endpoints: {
+        health: '/api/health',
+        v1: '/api/v1',
+      },
       version: '1.0.0',
-      documentation: 'See README.md for endpoint specifications',
     });
   });
 }
 
-// Global Error Handler
+// 8. Global Standardized Error Handler
 app.use(errorHandler);
 
 export default app;

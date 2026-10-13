@@ -8,16 +8,17 @@ import {
   getAdminUsers,
 } from '../controllers/userController';
 import { authenticateToken, requireAdmin } from '../middleware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
-router.get('/profile', authenticateToken, getUserProfile);
-router.put('/profile', authenticateToken, updateUserProfile);
-router.get('/addresses', authenticateToken, getUserAddresses);
-router.post('/addresses', authenticateToken, addAddress);
-router.delete('/addresses/:id', authenticateToken, deleteAddress);
+router.get('/profile', authenticateToken, asyncHandler(getUserProfile));
+router.put('/profile', authenticateToken, asyncHandler(updateUserProfile));
+router.get('/addresses', authenticateToken, asyncHandler(getUserAddresses));
+router.post('/addresses', authenticateToken, asyncHandler(addAddress));
+router.delete('/addresses/:id', authenticateToken, asyncHandler(deleteAddress));
 
 // Admin-only user list
-router.get('/admin/all', authenticateToken, requireAdmin, getAdminUsers);
+router.get('/admin/all', authenticateToken, requireAdmin, asyncHandler(getAdminUsers));
 
 export default router;

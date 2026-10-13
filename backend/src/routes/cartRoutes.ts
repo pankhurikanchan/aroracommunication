@@ -7,13 +7,14 @@ import {
   clearCart,
 } from '../controllers/cartController';
 import { optionalAuth } from '../middleware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
-router.get('/', optionalAuth, getCart);
-router.post('/', optionalAuth, addToCart);
-router.put('/:id', optionalAuth, updateCartItem);
-router.delete('/:id', optionalAuth, removeCartItem);
-router.delete('/', optionalAuth, clearCart);
+router.get('/', optionalAuth, asyncHandler(getCart));
+router.post('/', optionalAuth, asyncHandler(addToCart));
+router.put('/:id', optionalAuth, asyncHandler(updateCartItem));
+router.delete('/:id', optionalAuth, asyncHandler(removeCartItem));
+router.delete('/', optionalAuth, asyncHandler(clearCart));
 
 export default router;
